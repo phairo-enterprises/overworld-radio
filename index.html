@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overworld Radio</title>
-    <style>
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            text-align: center;
-            padding-top: 20%;
-            background-color: #f0f0f0;
-        }
-    </style>
+    <!-- Link to your favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Link to external stylesheet, if any -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
 </head>
 <body>
-    <h1>11-11-23</h1>
-    <h1>12-25-23</h1>
-    <p>Stay Tuned</p>
-    <a href="recruitment.html">Recruitment Page</a>
-    <a href="more.html">More</a>
+    <!-- Docsify will render content within this div -->
+    <div id="app"></div>
 
+    <!-- Docsify configuration -->
+    <script>
+        window.$docsify = {
+            loadNavbar: true,  // Load navbar from _navbar.md
+            auto2top: true    // Scroll to top when navigating to a new page
+            // Future configuration options can be added here
+        }
+    </script>
+
+    <!-- Include Docsify library -->
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+
+    <!-- Future JavaScript files can be linked here -->
+    <!-- <script src="script.js"></script> -->
 
 </body>
 </html>
