@@ -8,7 +8,7 @@ Phairo's mission is to make survival an automated certainty for all, yet positio
 
 ## Contact Us
 
-For any inquiries, feedback, or partnership requests, please refer to our [Contact Page](contact.md).
+For any inquiries, feedback, or partnership requests, please refer to our [Contact Page](contact.html).
 
 ---
 
