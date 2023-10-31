@@ -1,61 +1,41 @@
-// Function to load and display the content of a given Markdown file
-function loadMDfile(filename) {
-    // Log to the console
-    logToConsole(`Attempting to load ${filename}...`);
-
-    // Fetch the content of the file
-    fetch(filename)
-        .then(response => {
-            // Check if the request was successful
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(content => {
-            // Convert the Markdown content to HTML using marked.js
-            const renderedHTML = marked(content);
-
-            // Display the rendered content in the contentArea div
-            document.getElementById('contentArea').innerHTML = renderedHTML;
-
-            // Log success to the console
-            logToConsole(`${filename} loaded and rendered successfully.`);
-        })
-        .catch(error => {
-            // Log any errors to the console
-            logToConsole(`Failed to load ${filename}. Error: ${error.message}`);
-        });
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Define the repository and owner
+    // Define constants for the GitHub repository details.
     const repoOwner = 'phairo-enterprises';
     const repoName = 'overworld-radio';
 
-    // Fetch the list of files from the repository using GitHub API
+    // Use GitHub's API to fetch a list of all the files within the specified repository.
     fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/git/trees/main?recursive=1`)
         .then(response => response.json())
         .then(data => {
+            // Filter out only the Markdown files from the fetched list.
             const mdFiles = data.tree.filter(item => item.path.endsWith('.md')).map(item => item.path);
             
             const mdFilesListDiv = document.getElementById('MD-files-list');
 
+            // For each Markdown file, create a link that, when clicked, loads and renders the file.
             mdFiles.forEach(file => {
                 const fileLink = document.createElement('a');
-                fileLink.href = '#';  // Prevent default navigation
+                fileLink.href = '#';  // This ensures the browser doesn't navigate away when the link is clicked.
                 fileLink.innerText = file;
                 fileLink.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    loadMDfile(`https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${file}`);  // Use the loadMDfile function
+                    event.preventDefault();  // Prevent the default action associated with clicking a link.
+                    showMDContent(`https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${file}`);
                 });
                 mdFilesListDiv.appendChild(fileLink);
 
-                // Add a line break for clarity
+                // Add a title link that allows toggling the MD file list.
+                const titleLink = document.createElement('a');
+                titleLink.href = '#';
+                titleLink.innerText = file; // Display the MD file name as the title.
+                titleLink.addEventListener('click', toggleMDList);
+                document.body.appendChild(titleLink); // Append the title link to the body.
+
+                // Improve readability by separating each file link with a line break.
                 mdFilesListDiv.appendChild(document.createElement('br'));
             });
         })
         .catch(error => {
-            console.error("Error fetching MD files:", error);
+            // Handle potential errors in fetching the file list.
+            logToConsole(`Error fetching MD files: ${error.message}`, "error");
         });
 });
