@@ -1,4 +1,4 @@
-function setEnhancedTitle() {
+function setRootTitle() {
     const repoOwner = 'phairo-enterprises';
     const repoName = 'overworld-radio';
     const readmeUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/README.md`;
@@ -16,7 +16,7 @@ function setEnhancedTitle() {
             const firstHeader = content.match(/^#\s(.+)$/m);
             const title = firstHeader ? firstHeader[1] : "no-readme";
 
-            // Update the enhanced mode title with the extracted title
+            // Update the enhanced title in the enhanced mode container with the extracted title
             document.getElementById('enhanced-title').innerText = title;
         })
         .catch(error => {
