@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 fileLink.innerText = file;
                 fileLink.addEventListener('click', function(event) {
                     event.preventDefault();
-                    loadMDFile(file);  // Use the loadMDFile function
+                    loadMDfile(file);  // Use the loadMDfile function
                 });
                 mdFilesListDiv.appendChild(fileLink);
 
