@@ -53,6 +53,67 @@
         <!-- Body for the enhanced mode content -->
         <div id="enhanced-body"></div>
     </div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MagicMD</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Ensuring consistent dark mode styling across the app */
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+
+        /* Provides a visual boundary for the rendered markdown content */
+        #contentArea {
+            border: 1px solid #888888;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 600px;
+        }
+
+        /* Limit consoleOutput to display 5 lines and make it scrollable */
+        #consoleOutput {
+            max-height: calc(1.2em * 5); /* Assuming 1.2em is the line height, adjust if needed */
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body onload="console.log('Body loaded.'); setRootTitle()">
+    <h1 id="main-heading">Welcome to MagicMD!</h1>
+
+    <!-- For displaying logs and updates to the user -->
+    <div id="consoleOutput" class="console-output"></div>
+
+    <!-- Dropdown or list for user to select MD files -->
+    <p id="md-selection-text">Select an MD file to view:</p>
+    <div id="MD-files-list" role="listbox" aria-label="Markdown files list"></div>
+
+    <!-- Switches UI to "Magic Mode", hiding UI elements -->
+    <button id="activate-magic" onclick="console.log('Activate MagicMD button clicked.'); activateMagicMD()">Activate MagicMD</button>
+    <!-- For debugging purposes; reverses the "Magic Mode" changes -->
+    <button id="deactivate-magic" onclick="console.log('Unmagic button clicked.'); deactivateMagicMD()" style="display:none;">Unmagic (Dev Only)</button>
+
+    <!-- Area where the markdown content will be rendered -->
+    <div id="contentArea"></div>
+
+    <!-- Box for enhanced mode -->
+    <div id="enhanced-box" style="display: none; border: 2px solid #444; padding: 10px; margin-top: 10px;">
+        <!-- Title for the enhanced mode content -->
+        <h2 id="enhanced-title" style="border-bottom: 2px solid #888; padding-bottom: 10px;">Enhanced Mode Title</h2>
+        
+        <!-- Visual separator -->
+        <hr style="border-top: 2px dashed #666; margin: 20px 0;">
+        
+        <!-- Body for the enhanced mode content -->
+        <div id="enhanced-body"></div>
+    </div>
 
     <!-- External dependencies and utility functions -->
     <script src="libs/marked/marked.min.js"></script>
