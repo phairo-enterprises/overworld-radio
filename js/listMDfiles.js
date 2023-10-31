@@ -1,34 +1,46 @@
-// This function fetches, converts, and renders a specified Markdown file.
-function loadMDfile(filename) {
-    console.log('loadMDfile function called with filename:', filename);
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOMContentLoaded event fired.');
 
-    // Inform the user that the loading process has started.
-    logToConsole(`Attempting to load ${filename}...`);
+    // Constants for the GitHub repository details.
+    const repoOwner = 'phairo-enterprises';
+    const repoName = 'overworld-radio';
 
-    // Fetch the content of the provided file.
-    fetch(filename)
+    // Fetch a list of all files within the specified GitHub repository.
+    fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/git/trees/main?recursive=1`)
         .then(response => {
-            console.log('Fetch response received:', response);
-            // Handle non-successful HTTP responses.
+            console.log('GitHub API response received:', response);
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                throw new Error(`GitHub API returned status: ${response.status}`);
             }
-            return response.text();
+            return response.json();
         })
-        .then(content => {
-            console.log('Fetched content:', content.substring(0, 100) + "...");  // Log the first 100 chars for brevity
-            // Convert the fetched Markdown content into HTML using the 'marked' library.
-            const renderedHTML = marked(content);
+        .then(data => {
+            console.log('GitHub API data:', data);
+            // Filter to get only the Markdown files from the fetched list.
+            const mdFiles = data.tree.filter(item => item.path.endsWith('.md')).map(item => item.path);
 
-            // Display the converted HTML content in the designated content area.
-            document.getElementById('contentArea').innerHTML = renderedHTML;
+            const mdFilesListDiv = document.getElementById('MD-files-list');
 
-            // Update the user about the successful rendering of the file.
-            logToConsole(`${filename} loaded and rendered successfully.`);
+            // Render each Markdown file as a link. Clicking on the link will display its content.
+            mdFiles.forEach(file => {
+                console.log('Processing MD file:', file);
+                const fileLink = document.createElement('a');
+                fileLink.href = '#';
+                fileLink.innerText = file;
+                fileLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    console.log('MD file link clicked:', file);
+                    loadMDfile(`https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${file}`);
+                });
+                mdFilesListDiv.appendChild(fileLink);
+
+                // Add a line break for visual separation of file links.
+                mdFilesListDiv.appendChild(document.createElement('br'));
+            });
         })
         .catch(error => {
-            console.error('Error in loadMDfile:', error);
-            // In case of any errors, inform the user with the specific error message.
-            logToConsole(`Failed to load ${filename}. Error: ${error.message}`, "error");
+            console.error('Error in listMDfiles:', error);
+            // Log errors to the console output.
+            logToConsole(`Error fetching MD files: ${error.message}`);
         });
-}
+});
