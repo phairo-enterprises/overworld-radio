@@ -4,88 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MagicMD</title>
+    <link rel="stylesheet" href="css/styles.css">
     <style>
+        /* Specific CSS for Non-Enhanced Mode */
         body {
-            font-family: 'Helvetica Neue', Helvetica, sans-serif;
-            background-color: #333;
-            color: #f5f5f5;
+            background-color: #121212; /* Dark Mode */
+            color: #ffffff; /* Text color for Dark Mode */
+            font-family: 'Helvetica Neue', sans-serif; /* Set default font */
         }
-
+        
+        /* Box around the MD text body */
         #contentArea {
-            border: 2px solid #888;
-            padding: 16px;
-            margin: 20px 0;
+            border: 1px solid #888888;
+            padding: 10px;
             overflow-y: auto;
-            max-height: 80vh;
-        }
-
-        #MD-files-list a {
-            display: block;
-            padding: 5px;
-            cursor: pointer;
-        }
-
-        #MD-files-list a:hover {
-            background-color: #555;
-        }
-
-        button {
-            background-color: #555;
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            margin: 5px;
-        }
-
-        button:hover {
-            background-color: #777;
+            max-height: 600px; /* Example max height, can adjust based on requirements */
         }
     </style>
-    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <h1>MagicMD</h1>
+<h1 id="main-heading">Welcome to MagicMD!</h1>
 
-    <div id="MD-files-list"></div>
+<!-- Console output area -->
+<div id="consoleOutput" class="console-output"></div>
 
-    <div id="contentArea"></div>
+<!-- List of MD files -->
+<p id="md-selection-text">Select an MD file to view:</p>
+<div id="MD-files-list" role="listbox" aria-label="Markdown files list"></div>
 
-    <script src="libs/marked/marked.min.js"></script>
-    <script src="js/loadMDfile.js"></script>
-    <script src="js/listMDfiles.js"></script>
-    <script src="js/magicMD.js"></script>
+<!-- Activation button for MagicMD -->
+<button id="activate-magic" onclick="activateMagicMD()">Activate MagicMD</button>
+<!-- Development only Unmagic button -->
+<button id="deactivate-magic" onclick="deactivateMagicMD()" style="display:none;">Unmagic (Dev Only)</button>
 
-    <script>
-        function activateMagicMD() {
-            // Hide non-enhanced elements
-            document.getElementById('consoleOutput').style.display = 'none';
-            document.getElementById('activate-magic').style.display = 'none';
-            document.getElementById('contentArea').style.display = 'none';
+<!-- Placeholder for the rendered content -->
+<div id="contentArea"></div>
 
-            // Show MD files as a tree
-            document.getElementById('MD-files-list').style.display = 'block';
-        }
+<!-- Libraries and External Dependencies -->
+<script src="libs/marked/marked.min.js"></script>
 
-        function showMDContent(filename) {
-            // Hide MD file list
-            document.getElementById('MD-files-list').style.display = 'none';
+<!-- Custom Scripts -->
+<script src="js/loadMDfile.js"></script>
+<script src="js/listMDfiles.js"></script>
+<script src="js/magicMD.js"></script>
 
-            // Show selected MD content
-            loadMDfile(filename);
-            document.getElementById('contentArea').style.display = 'block';
-        }
+<script>
+    function logToConsole(message) {
+        const consoleDiv = document.getElementById("consoleOutput");
+        const timestamp = new Date().toLocaleTimeString();
+        consoleDiv.innerHTML += `[${timestamp}] ${message}<br>`;
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+    }
 
-        function toggleMDList() {
-            const mdList = document.getElementById('MD-files-list');
-            if (mdList.style.display === 'none') {
-                mdList.style.display = 'block';
-            } else {
-                mdList.style.display = 'none';
-            }
-        }
-    </script>
+    function activateMagicMD() {
+        // Hide elements, making them "virtualized"
+        document.getElementById('main-heading').style.display = 'none';
+        document.getElementById('MD-files-list').style.display = 'none';
+        document.getElementById('contentArea').style.display = 'none';
+        document.getElementById('activate-magic').style.display = 'none';
+        document.getElementById('md-selection-text').style.display = 'none';
+        
+        // Show the dev-only Unmagic button
+        document.getElementById('deactivate-magic').style.display = 'block';
+
+        logToConsole("MagicMD activated!");
+    }
+
+    function deactivateMagicMD() {
+        // Display the original content for non-enhanced mode
+        document.getElementById('main-heading').style.display = 'block';
+        document.getElementById('MD-files-list').style.display = 'block';
+        document.getElementById('contentArea').style.display = 'block';
+        document.getElementById('activate-magic').style.display = 'block';
+        document.getElementById('md-selection-text').style.display = 'block';
+
+        // Hide the Unmagic button
+        document.getElementById('deactivate-magic').style.display = 'none'; 
+
+        logToConsole("MagicMD deactivated (Dev Only)!");
+    }
+</script>
 
 </body>
 </html>
