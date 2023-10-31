@@ -3,32 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overworld Radio</title>
-    <!-- Link to your favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <!-- Link to external stylesheet, if any -->
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <title>MagicMD</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Placeholder for styles -->
 </head>
 <body>
-    <!-- Docsify will render content within this div -->
-    <div id="app"></div>
 
-    <!-- Docsify configuration -->
+    <h1>Welcome to MagicMD!</h1>
+
+    <!-- Console output area -->
+    <div id="consoleOutput" style="border: 1px solid black; height: 200px; overflow-y: scroll; margin-bottom: 20px;"></div>
+
+    <!-- List of MD files -->
+    <p>Select an MD file to view:</p>
+    <div id="MD-files-list"></div>
+
+    <!-- Activation button for MagicMD -->
+    <button id="activate-magic" onclick="activateMagicMD()">Activate MagicMD</button>
+
+    <!-- Placeholder for the rendered content -->
+    <div id="contentArea"></div>
+
+    <!-- Libraries and External Dependencies -->
+    <script type="module" src="libs/marked/bin/marked.js"></script>
+
+    <!-- Custom Scripts -->
+    <script defer src="js/listMDfiles.js"></script>
+    <script defer src="js/loadMDfile.js"></script>
+    <script defer src="js/magicMD.js"></script>
+
+    <!-- JavaScript function for logging and activation -->
     <script>
-        window.$docsify = {
-            loadNavbar: true,   // Ensure the navbar is loaded from _navbar.md
-            auto2top: true,     // Scroll to top when navigating to a new page
-            subMaxLevel: 2,     // Disable header links for headers above this level
-            debug: true         // Enable debug mode for troubleshooting
-            // Additional configuration options can be added here in the future
+        function logToConsole(message) {
+            const consoleDiv = document.getElementById("consoleOutput");
+            const timestamp = new Date().toLocaleTimeString(); // Get the current time
+            consoleDiv.innerHTML += `[${timestamp}] ${message}<br>`; // Append the message with a timestamp
+            consoleDiv.scrollTop = consoleDiv.scrollHeight; // Auto-scroll to the latest message
+        }
+
+        function activateMagicMD() {
+            // Remove current non-enhanced listeners
+            // (This can be expanded upon when you define your non-enhanced listeners)
+            // Example: document.getElementById('MD-files-list').removeEventListener('click', nonEnhancedFunction);
+
+            // Activate enhanced functionalities
+            attachEnhancedListeners();
+            logToConsole("MagicMD activated!");
         }
     </script>
-
-    <!-- Include Docsify library -->
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-
-    <!-- Future JavaScript files can be linked here -->
-    <!-- <script src="script.js"></script> -->
 
 </body>
 </html>
