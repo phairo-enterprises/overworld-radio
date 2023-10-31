@@ -1,4 +1,4 @@
-Version ID: 1.0.7
+Version ID: 1.0.8
 
 # Overworld Radio
 
