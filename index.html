@@ -6,19 +6,19 @@
     <title>MagicMD</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
-        /* Specific CSS for Non-Enhanced Mode */
+        /* Ensuring consistent dark mode styling across the app */
         body {
-            background-color: #121212; /* Dark Mode */
-            color: #ffffff; /* Text color for Dark Mode */
-            font-family: 'Helvetica Neue', sans-serif; /* Set default font */
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Helvetica Neue', sans-serif;
         }
-        
-        /* Box around the MD text body */
+
+        /* Provides a visual boundary for the rendered markdown content */
         #contentArea {
             border: 1px solid #888888;
             padding: 10px;
             overflow-y: auto;
-            max-height: 600px; /* Example max height, can adjust based on requirements */
+            max-height: 600px;
         }
     </style>
 </head>
@@ -26,30 +26,31 @@
 
 <h1 id="main-heading">Welcome to MagicMD!</h1>
 
-<!-- Console output area -->
+<!-- For displaying logs and updates to the user -->
 <div id="consoleOutput" class="console-output"></div>
 
-<!-- List of MD files -->
+<!-- Dropdown or list for user to select MD files -->
 <p id="md-selection-text">Select an MD file to view:</p>
 <div id="MD-files-list" role="listbox" aria-label="Markdown files list"></div>
 
-<!-- Activation button for MagicMD -->
+<!-- Switches UI to "Magic Mode", hiding UI elements -->
 <button id="activate-magic" onclick="activateMagicMD()">Activate MagicMD</button>
-<!-- Development only Unmagic button -->
+<!-- For debugging purposes; reverses the "Magic Mode" changes -->
 <button id="deactivate-magic" onclick="deactivateMagicMD()" style="display:none;">Unmagic (Dev Only)</button>
 
-<!-- Placeholder for the rendered content -->
+<!-- Area where the markdown content will be rendered -->
 <div id="contentArea"></div>
 
-<!-- Libraries and External Dependencies -->
+<!-- External dependencies and utility functions -->
 <script src="libs/marked/marked.min.js"></script>
 
-<!-- Custom Scripts -->
+<!-- Custom Scripts for MagicMD functionality -->
 <script src="js/loadMDfile.js"></script>
 <script src="js/listMDfiles.js"></script>
 <script src="js/magicMD.js"></script>
 
 <script>
+    /* Utility function for logging messages with timestamps */
     function logToConsole(message) {
         const consoleDiv = document.getElementById("consoleOutput");
         const timestamp = new Date().toLocaleTimeString();
@@ -57,32 +58,34 @@
         consoleDiv.scrollTop = consoleDiv.scrollHeight;
     }
 
+    /* Function to hide main UI elements, simulating a "Magic Mode" */
     function activateMagicMD() {
-        // Hide elements, making them "virtualized"
+        // Hide primary UI components
         document.getElementById('main-heading').style.display = 'none';
         document.getElementById('MD-files-list').style.display = 'none';
         document.getElementById('contentArea').style.display = 'none';
         document.getElementById('activate-magic').style.display = 'none';
         document.getElementById('md-selection-text').style.display = 'none';
         
-        // Show the dev-only Unmagic button
+        // Show debug-only button
         document.getElementById('deactivate-magic').style.display = 'block';
 
         logToConsole("MagicMD activated!");
     }
 
+    /* Function to reverse the changes made by activateMagicMD() */
     function deactivateMagicMD() {
-        // Display the original content for non-enhanced mode
+        // Show primary UI components
         document.getElementById('main-heading').style.display = 'block';
         document.getElementById('MD-files-list').style.display = 'block';
         document.getElementById('contentArea').style.display = 'block';
         document.getElementById('activate-magic').style.display = 'block';
         document.getElementById('md-selection-text').style.display = 'block';
+        
+        // Hide debug-only button
+        document.getElementById('deactivate-magic').style.display = 'none';
 
-        // Hide the Unmagic button
-        document.getElementById('deactivate-magic').style.display = 'none'; 
-
-        logToConsole("MagicMD deactivated (Dev Only)!");
+        logToConsole("MagicMD deactivated!");
     }
 </script>
 
