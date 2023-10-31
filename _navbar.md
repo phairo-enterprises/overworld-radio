@@ -1,2 +1,2 @@
-- [Home](#/)
-- [More](#/more)
+- [Home](./)
+- [More](./more.md)
