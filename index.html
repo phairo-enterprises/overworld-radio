@@ -4,50 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MagicMD</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- Placeholder for styles -->
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, sans-serif;
+            background-color: #333;
+            color: #f5f5f5;
+        }
+
+        #contentArea {
+            border: 2px solid #888;
+            padding: 16px;
+            margin: 20px 0;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        #MD-files-list a {
+            display: block;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        #MD-files-list a:hover {
+            background-color: #555;
+        }
+
+        button {
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <h1>Welcome to MagicMD!</h1>
+    <h1>MagicMD</h1>
 
-    <!-- Console output area -->
-    <div id="consoleOutput" style="border: 1px solid black; height: 200px; overflow-y: scroll; margin-bottom: 20px;"></div>
-
-    <!-- List of MD files -->
-    <p>Select an MD file to view:</p>
     <div id="MD-files-list"></div>
 
-    <!-- Activation button for MagicMD -->
-    <button id="activate-magic" onclick="activateMagicMD()">Activate MagicMD</button>
-
-    <!-- Placeholder for the rendered content -->
     <div id="contentArea"></div>
 
-    <!-- Libraries and External Dependencies -->
-    <script src="libs/marked/bin/marked.js"></script>
-
-    <!-- Custom Scripts -->
+    <script src="libs/marked/marked.min.js"></script>
     <script src="js/loadMDfile.js"></script>
     <script src="js/listMDfiles.js"></script>
     <script src="js/magicMD.js"></script>
 
-    <!-- JavaScript function for logging and activation -->
     <script>
-        function logToConsole(message) {
-            const consoleDiv = document.getElementById("consoleOutput");
-            const timestamp = new Date().toLocaleTimeString(); // Get the current time
-            consoleDiv.innerHTML += `[${timestamp}] ${message}<br>`; // Append the message with a timestamp
-            consoleDiv.scrollTop = consoleDiv.scrollHeight; // Auto-scroll to the latest message
+        function activateMagicMD() {
+            // Hide non-enhanced elements
+            document.getElementById('consoleOutput').style.display = 'none';
+            document.getElementById('activate-magic').style.display = 'none';
+            document.getElementById('contentArea').style.display = 'none';
+
+            // Show MD files as a tree
+            document.getElementById('MD-files-list').style.display = 'block';
         }
 
-        function activateMagicMD() {
-            // Remove current non-enhanced listeners
-            // (This can be expanded upon when you define your non-enhanced listeners)
-            // Example: document.getElementById('MD-files-list').removeEventListener('click', nonEnhancedFunction);
+        function showMDContent(filename) {
+            // Hide MD file list
+            document.getElementById('MD-files-list').style.display = 'none';
 
-            // Activate enhanced functionalities
-            attachEnhancedListeners();
-            logToConsole("MagicMD activated!");
+            // Show selected MD content
+            loadMDfile(filename);
+            document.getElementById('contentArea').style.display = 'block';
+        }
+
+        function toggleMDList() {
+            const mdList = document.getElementById('MD-files-list');
+            if (mdList.style.display === 'none') {
+                mdList.style.display = 'block';
+            } else {
+                mdList.style.display = 'none';
+            }
         }
     </script>
 
