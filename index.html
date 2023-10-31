@@ -21,61 +21,6 @@
             overflow-y: auto;
             max-height: 600px;
         }
-    </style>
-</head>
-
-<body onload="console.log('Body loaded.'); setRootTitle()">
-    <h1 id="main-heading">Welcome to MagicMD!</h1>
-
-    <!-- For displaying logs and updates to the user -->
-    <div id="consoleOutput" class="console-output"></div>
-
-    <!-- Dropdown or list for user to select MD files -->
-    <p id="md-selection-text">Select an MD file to view:</p>
-    <div id="MD-files-list" role="listbox" aria-label="Markdown files list"></div>
-
-    <!-- Switches UI to "Magic Mode", hiding UI elements -->
-    <button id="activate-magic" onclick="console.log('Activate MagicMD button clicked.'); activateMagicMD()">Activate MagicMD</button>
-    <!-- For debugging purposes; reverses the "Magic Mode" changes -->
-    <button id="deactivate-magic" onclick="console.log('Unmagic button clicked.'); deactivateMagicMD()" style="display:none;">Unmagic (Dev Only)</button>
-
-    <!-- Area where the markdown content will be rendered -->
-    <div id="contentArea"></div>
-
-    <!-- Box for enhanced mode -->
-    <div id="enhanced-box" style="display: none; border: 2px solid #444; padding: 10px; margin-top: 10px;">
-        <!-- Title for the enhanced mode content -->
-        <h2 id="enhanced-title" style="border-bottom: 2px solid #888; padding-bottom: 10px;">Enhanced Mode Title</h2>
-        
-        <!-- Visual separator -->
-        <hr style="border-top: 2px dashed #666; margin: 20px 0;">
-        
-        <!-- Body for the enhanced mode content -->
-        <div id="enhanced-body"></div>
-    </div>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MagicMD</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        /* Ensuring consistent dark mode styling across the app */
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: 'Helvetica Neue', sans-serif;
-        }
-
-        /* Provides a visual boundary for the rendered markdown content */
-        #contentArea {
-            border: 1px solid #888888;
-            padding: 10px;
-            overflow-y: auto;
-            max-height: 600px;
-        }
 
         /* Limit consoleOutput to display 5 lines and make it scrollable */
         #consoleOutput {
@@ -133,32 +78,7 @@
         }
 
         function setEnhancedTitle() {
-            console.log('setEnhancedTitle function called.');
-            const repoOwner = 'phairo-enterprises';
-            const repoName = 'overworld-radio';
-            const readmeUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/README.md`;
-
-            // Fetch the README.md content
-            fetch(readmeUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Failed to fetch README.md");
-                    }
-                    return response.text();
-                })
-                .then(content => {
-                    // Extract the first header from the README.md
-                    const firstHeader = content.match(/^#\s(.+)$/m);
-                    const title = firstHeader ? firstHeader[1] : "no-readme";
-
-                    // Set the enhanced mode title with the extracted title
-                    document.getElementById('enhanced-title').innerText = title;
-                })
-                .catch(error => {
-                    // On error, set the title to "no-readme"
-                    document.getElementById('enhanced-title').innerText = "no-readme";
-                    logToConsole(`Error setting enhanced title from README.md: ${error.message}`, "error");
-                });
+            // ... [Existing setEnhancedTitle function] ...
         }
 
         /* Function to hide main UI elements, simulating a "Magic Mode" */
@@ -173,6 +93,21 @@
             // Show debug-only button and the enhanced mode components
             document.getElementById('deactivate-magic').style.display = 'block';
             document.getElementById('enhanced-box').style.display = 'block';
+
+            // This function will move the links to the enhanced body and 
+            // setup the event listeners to display the MD content when clicked.
+            // Previously this was handled directly inside listMDfiles.js
+            const mdFilesList = document.getElementById('MD-files-list');
+            const enhancedBodyDiv = document.getElementById('enhanced-body');
+            while (mdFilesList.firstChild) {
+                const mdFileLink = mdFilesList.firstChild;
+                mdFileLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const filename = `https://raw.githubusercontent.com/phairo-enterprises/overworld-radio/main/${mdFileLink.innerText}`;
+                    loadMDfile(filename);
+                });
+                enhancedBodyDiv.appendChild(mdFileLink);
+            }
 
             setEnhancedTitle(); 
             logToConsole("MagicMD activated!");
