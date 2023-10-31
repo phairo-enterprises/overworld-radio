@@ -1,8 +1,3 @@
----
-layout: default
-title: Phairo Enterprises Splash
----
-
 # Phairo Enterprises
 
 The "PH" represents the enigma of phonetics and mystique in all our creations, with "fair" emphasizing the enterprise's dedication to 100% free yet Tribute based and hinged on reputation systems, while the "O" references the ancient's obsession with this perfect shape; the ancient Chinese beliefs about heaven and harmony {list other cultural significance}.
