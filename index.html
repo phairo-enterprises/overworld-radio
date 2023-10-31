@@ -2,140 +2,77 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MagicMD</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        /* Ensuring consistent dark mode styling across the app */
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: 'Helvetica Neue', sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MagicMD</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Ensuring consistent dark mode styling across the app */
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
 
-        /* Provides a visual boundary for the rendered markdown content */
-        #contentArea {
-            border: 1px solid #888888;
-            padding: 10px;
-            overflow-y: auto;
-            max-height: 600px;
-        }
-    </style>
+    /* Provides a visual boundary for the rendered markdown content */
+    #contentArea {
+      border: 1px solid #888888;
+      padding: 10px;
+      overflow-y: auto;
+      max-height: 600px;
+    }
+  </style>
 </head>
 
-<body>
+<body onload="setRootTitle()"> <!-- Added onload event to call setRootTitle function -->
+  <h1 id="main-heading">Welcome to MagicMD!</h1>
 
-    <h1 id="main-heading">Welcome to MagicMD!</h1>
+  <!-- For displaying logs and updates to the user -->
+  <div id="consoleOutput" class="console-output"></div>
 
-    <!-- For displaying logs and updates to the user -->
-    <div id="consoleOutput" class="console-output"></div>
+  <!-- Dropdown or list for user to select MD files -->
+  <p id="md-selection-text">Select an MD file to view:</p>
+  <div id="MD-files-list" role="listbox" aria-label="Markdown files list"></div>
 
-    <!-- Dropdown or list for user to select MD files -->
-    <p id="md-selection-text">Select an MD file to view:</p>
-    <div id="MD-files-list" role="listbox" aria-label="Markdown files list"></div>
+  <!-- Switches UI to "Magic Mode", hiding UI elements -->
+  <button id="activate-magic" onclick="activateMagicMD()">Activate MagicMD</button>
+  <!-- For debugging purposes; reverses the "Magic Mode" changes -->
+  <button id="deactivate-magic" onclick="deactivateMagicMD()" style="display:none;">Unmagic (Dev Only)</button>
 
-    <!-- Switches UI to "Magic Mode", hiding UI elements -->
-    <button id="activate-magic" onclick="activateMagicMD()">Activate MagicMD</button>
-    <!-- For debugging purposes; reverses the "Magic Mode" changes -->
-    <button id="deactivate-magic" onclick="deactivateMagicMD()" style="display:none;">Unmagic (Dev Only)</button>
+  <!-- Area where the markdown content will be rendered -->
+  <div id="contentArea"></div>
 
-    <!-- Area where the markdown content will be rendered -->
-    <div id="contentArea"></div>
+  <!-- Box for enhanced mode -->
+  <div id="enhanced-box" style="display: none; border: 2px solid #444; padding: 10px; margin-top: 10px;">
+    <!-- Title for the enhanced mode content -->
+    <h2 id="enhanced-title" style="border-bottom: 2px solid #888; padding-bottom: 10px;">Enhanced Mode Title</h2>
 
-    <!-- Box for enhanced mode -->
-    <div id="enhanced-box" style="display: none; border: 2px solid #444; padding: 10px; margin-top: 10px;">
-        <!-- Title for the enhanced mode content -->
-        <h2 id="enhanced-title" style="border-bottom: 2px solid #888; padding-bottom: 10px;">Enhanced Mode Title</h2>
-        
-        <!-- Visual separator -->
-        <hr style="border-top: 2px dashed #666; margin: 20px 0;">
-        
-        <!-- Body for the enhanced mode content -->
-        <div id="enhanced-body">
-            Enhanced Mode Content Goes Here.
-        </div>
-    </div>
+    <!-- Visual separator -->
+    <hr style="border-top: 2px dashed #666; margin: 20px 0;">
 
-    <!-- External dependencies and utility functions -->
-    <script src="libs/marked/marked.min.js"></script>
+    <!-- Body for the enhanced mode content -->
+    <div id="enhanced-body"></div> <!-- Removed the placeholder text -->
+  </div>
 
-    <!-- Custom Scripts for MagicMD functionality -->
-    <script src="js/loadMDfile.js"></script>
-    <script src="js/listMDfiles.js"></script>
-    <script src="js/magicMD.js"></script>
+  <!-- External dependencies and utility functions -->
+  <script src="libs/marked/marked.min.js"></script>
 
-    <script>
-        /* Utility function for logging messages with timestamps */
-        function logToConsole(message) {
-            const consoleDiv = document.getElementById("consoleOutput");
-            const timestamp = new Date().toLocaleTimeString();
-            consoleDiv.innerHTML += `[${timestamp}] ${message}<br>`;
-            consoleDiv.scrollTop = consoleDiv.scrollHeight;
-        }
+  <!-- Custom Scripts for MagicMD functionality -->
+  <script src="js/loadMDfile.js"></script>
+  <script src="js/listMDfiles.js"></script>
+  <script src="js/magicMDControl.js"></script>
+  <script src="js/rootTitleManager.js"></script> <!-- Added the reference for rootTitleManager.js -->
+  <script src="js/magicMD.js"></script>
 
-        function setEnhancedTitle() {
-            const repoOwner = 'phairo-enterprises';
-            const repoName = 'overworld-radio';
-            const readmeUrl = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/README.md`;
-
-            // Fetch the README.md content
-            fetch(readmeUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Failed to fetch README.md");
-                    }
-                    return response.text();
-                })
-                .then(content => {
-                    // Extract the first header from the README.md
-                    const firstHeader = content.match(/^#\s(.+)$/m);
-                    const title = firstHeader ? firstHeader[1] : "no-readme";
-
-                    // Set the enhanced mode title with the extracted title
-                    document.getElementById('enhanced-title').innerText = title;
-                })
-                .catch(error => {
-                    // On error, set the title to "no-readme"
-                    document.getElementById('enhanced-title').innerText = "no-readme";
-                    logToConsole(`Error setting enhanced title from README.md: ${error.message}`, "error");
-                });
-        }
-
-        /* Function to hide main UI elements, simulating a "Magic Mode" */
-        function activateMagicMD() {
-            // Hide primary UI components
-            document.getElementById('main-heading').style.display = 'none';
-            document.getElementById('MD-files-list').style.display = 'none';
-            document.getElementById('contentArea').style.display = 'none';
-            document.getElementById('activate-magic').style.display = 'none';
-            document.getElementById('md-selection-text').style.display = 'none';
-
-            // Show debug-only button and the enhanced mode components
-            document.getElementById('deactivate-magic').style.display = 'block';
-            document.getElementById('enhanced-box').style.display = 'block';
-
-            setEnhancedTitle(); // Call the function to set the enhanced title from README.md
-
-            logToConsole("MagicMD activated!");
-        }
-
-        /* Function to reverse the changes made by activateMagicMD() */
-        function deactivateMagicMD() {
-            // Show primary UI components
-            document.getElementById('main-heading').style.display = 'block';
-            document.getElementById('MD-files-list').style.display = 'block';
-            document.getElementById('contentArea').style.display = 'block';
-            document.getElementById('activate-magic').style.display = 'block';
-            document.getElementById('md-selection-text').style.display = 'block';
-
-            // Hide debug-only button and the enhanced mode box
-            document.getElementById('deactivate-magic').style.display = 'none';
-            document.getElementById('enhanced-box').style.display = 'none';
-
-            logToConsole("MagicMD deactivated!");
-        }
-    </script>
+  <script>
+    /* Utility function for logging messages with timestamps */
+    function logToConsole(message) {
+      const consoleDiv = document.getElementById("consoleOutput");
+      const timestamp = new Date().toLocaleTimeString();
+      consoleDiv.innerHTML += `[${timestamp}] ${message}<br>`;
+      consoleDiv.scrollTop = consoleDiv.scrollHeight;
+    }
+  </script>
 
 </body>
 
