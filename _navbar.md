@@ -1,2 +1,2 @@
 - [Home](./)
-- [More](./more.md)
+- [Lock (Inactive)](./lock-feature-description)
