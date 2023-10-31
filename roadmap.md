@@ -1,8 +1,3 @@
----
-layout: default
-title: Welcome to Phairo Enterprises
----
-
 # Overworld Radio: Where Infinity Gets Mapped
 ## Phairo Enterprises: Where Infinity Meets Reality
 
