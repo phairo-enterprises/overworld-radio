@@ -1,11 +1,11 @@
 # More
 
-- [LICENSE](./LICENSE)
-- [README](./)
-- [Contact](./contact)
-- [About Repo](./aboutrepo)
-- [Main Content](./maincontent)
-- [Recruitment](./recruitment)
-- [Splash](./splash)
+- [LICENSE](./LICENSE.md)
+- [README](./README.md)
+- [Contact](./contact.md)
+- [About Repo](./aboutrepo.md)
+- [Main Content](./maincontent.md)
+- [Recruitment](./recruitment.md)
+- [Splash](./splash.md)
 
-[Back to Home](./)
+[Back to Home](./README.md)
