@@ -1,6 +1,6 @@
 # More
 
-- [LICENSE](./LICENSE.md)
+- [LICENSE](./license.md)
 - [README](./README.md)
 - [Contact](./contact.md)
 - [About Repo](./aboutrepo.md)
