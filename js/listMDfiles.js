@@ -1,3 +1,33 @@
+// Function to load and display the content of a given Markdown file
+function loadMDfile(filename) {
+    // Log to the console
+    logToConsole(`Attempting to load ${filename}...`);
+
+    // Fetch the content of the file
+    fetch(filename)
+        .then(response => {
+            // Check if the request was successful
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(content => {
+            // Convert the Markdown content to HTML using marked.js
+            const renderedHTML = marked(content);
+
+            // Display the rendered content in the contentArea div
+            document.getElementById('contentArea').innerHTML = renderedHTML;
+
+            // Log success to the console
+            logToConsole(`${filename} loaded and rendered successfully.`);
+        })
+        .catch(error => {
+            // Log any errors to the console
+            logToConsole(`Failed to load ${filename}. Error: ${error.message}`);
+        });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Define the repository and owner
     const repoOwner = 'phairo-enterprises';
@@ -17,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 fileLink.innerText = file;
                 fileLink.addEventListener('click', function(event) {
                     event.preventDefault();
-                    loadMDfile(file);  // Use the loadMDfile function
+                    loadMDfile(`https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${file}`);  // Use the loadMDfile function
                 });
                 mdFilesListDiv.appendChild(fileLink);
 
