@@ -1,134 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MagicMD</title>
+    <title>Overworld Radio</title>
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        /* Ensuring consistent dark mode styling across the app */
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            font-family: 'Helvetica Neue', sans-serif;
-        }
-
-        /* Provides a visual boundary for the rendered markdown content */
-        #contentArea {
-            border: 1px solid #888888;
-            padding: 10px;
-            overflow-y: auto;
-            max-height: 600px;
-        }
-
-        /* Limit consoleOutput to display 5 lines and make it scrollable */
-        #consoleOutput {
-            max-height: calc(1.2em * 5); /* Assuming 1.2em is the line height, adjust if needed */
-            overflow-y: auto;
-        }
-    </style>
 </head>
 
-<body onload="console.log('Body loaded.'); setRootTitle()">
-    <h1 id="main-heading">Welcome to MagicMD!</h1>
-
-    <!-- For displaying logs and updates to the user -->
-    <div id="consoleOutput" class="console-output"></div>
-
-    <!-- Dropdown or list for user to select MD files -->
-    <p id="md-selection-text">Select an MD file to view:</p>
-    <div id="MD-files-list" role="listbox" aria-label="Markdown files list"></div>
-
-    <!-- Switches UI to "Magic Mode", hiding UI elements -->
-    <button id="activate-magic" onclick="console.log('Activate MagicMD button clicked.'); activateMagicMD()">Activate MagicMD</button>
-    <!-- For debugging purposes; reverses the "Magic Mode" changes -->
-    <button id="deactivate-magic" onclick="console.log('Unmagic button clicked.'); deactivateMagicMD()" style="display:none;">Unmagic (Dev Only)</button>
-
-    <!-- Area where the markdown content will be rendered -->
-    <div id="contentArea"></div>
-
-    <!-- Box for enhanced mode -->
-    <div id="enhanced-box" style="display: none; border: 2px solid #444; padding: 10px; margin-top: 10px;">
-        <!-- Title for the enhanced mode content -->
-        <h2 id="enhanced-title" style="border-bottom: 2px solid #888; padding-bottom: 10px;">Enhanced Mode Title</h2>
-        
-        <!-- Visual separator -->
-        <hr style="border-top: 2px dashed #666; margin: 20px 0;">
-        
-        <!-- Body for the enhanced mode content -->
-        <div id="enhanced-body"></div>
+<body>
+    <div id="construction-message">
+        <h1>Under Construction: Enter if you dare</h1>
+        <button id="secret-button" onclick="revealAPIPrompt()">🔍</button>
     </div>
 
-    <!-- External dependencies and utility functions -->
-    <script src="libs/marked/marked.min.js"></script>
+    <div id="api-prompt" style="display: none;">
+        <label for="api-key">Enter API Key:</label>
+        <input type="text" id="api-key" name="api-key">
+        <button onclick="activateAPI()">Activate</button>
+    </div>
 
-    <!-- Custom Scripts for MagicMD functionality -->
-    <script src="js/loadMDfile.js"></script>
-    <script src="js/listMDfiles.js"></script>
-    <script src="js/magicMD.js"></script>
-
-    <script>
-        /* Utility function for logging messages with timestamps */
-        function logToConsole(message) {
-            const consoleDiv = document.getElementById("consoleOutput");
-            const timestamp = new Date().toLocaleTimeString();
-            consoleDiv.innerHTML += `[${timestamp}] ${message}<br>`;
-            consoleDiv.scrollTop = consoleDiv.scrollHeight;
-        }
-
-        function setEnhancedTitle() {
-            // ... [Existing setEnhancedTitle function] ...
-        }
-
-        /* Function to hide main UI elements, simulating a "Magic Mode" */
-        function activateMagicMD() {
-            console.log('activateMagicMD function called.');
-            document.getElementById('main-heading').style.display = 'none';
-            document.getElementById('MD-files-list').style.display = 'none';
-            document.getElementById('contentArea').style.display = 'none';
-            document.getElementById('activate-magic').style.display = 'none';
-            document.getElementById('md-selection-text').style.display = 'none';
-
-            // Show debug-only button and the enhanced mode components
-            document.getElementById('deactivate-magic').style.display = 'block';
-            document.getElementById('enhanced-box').style.display = 'block';
-
-            // This function will move the links to the enhanced body and 
-            // setup the event listeners to display the MD content when clicked.
-            // Previously this was handled directly inside listMDfiles.js
-            const mdFilesList = document.getElementById('MD-files-list');
-            const enhancedBodyDiv = document.getElementById('enhanced-body');
-            while (mdFilesList.firstChild) {
-                const mdFileLink = mdFilesList.firstChild;
-                mdFileLink.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const filename = `https://raw.githubusercontent.com/phairo-enterprises/overworld-radio/main/${mdFileLink.innerText}`;
-                    loadMDfile(filename);
-                });
-                enhancedBodyDiv.appendChild(mdFileLink);
-            }
-
-            setEnhancedTitle(); 
-            logToConsole("MagicMD activated!");
-        }
-
-        /* Function to reverse the changes made by activateMagicMD() */
-        function deactivateMagicMD() {
-            console.log('deactivateMagicMD function called.');
-            document.getElementById('main-heading').style.display = 'block';
-            document.getElementById('MD-files-list').style.display = 'block';
-            document.getElementById('contentArea').style.display = 'block';
-            document.getElementById('activate-magic').style.display = 'block';
-            document.getElementById('md-selection-text').style.display = 'block';
-
-            document.getElementById('deactivate-magic').style.display = 'none';
-            document.getElementById('enhanced-box').style.display = 'none';
-
-            logToConsole("MagicMD deactivated!");
-        }
-    </script>
-
+    <!-- Add your JS here -->
+    <script src="js/script.js"></script>
 </body>
 
 </html>
