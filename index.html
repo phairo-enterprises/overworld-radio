@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overworld Radio</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overworld Radio</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Keeping dark mode styling -->
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    /* Additional styles here if needed */
+  </style>
 </head>
 
 <body>
-    <div id="construction-message">
-        <h1>Under Construction: Enter if you dare</h1>
-        <button id="secret-button" onclick="revealAPIPrompt()">🔍</button>
-    </div>
+  <h1 id="main-heading">Overworld Radio - Under Construction</h1>
 
-    <div id="api-prompt" style="display: none;">
-        <label for="api-key">Enter API Key:</label>
-        <input type="text" id="api-key" name="api-key">
-        <button onclick="activateAPI()">Activate</button>
-    </div>
+  <!-- Enter button - redirects to old site (placeholder for now) -->
+  <button onclick="window.location.href='old_index.html'">Enter if You Dare</button>
 
-    <!-- Add your JS here -->
-    <script src="js/script.js"></script>
+  <!-- API Prompt section -->
+  <p>Enter API Key:</p>
+  <input type="text" id="api-key">
+  <button onclick="activateAPI()">Activate</button>
+
+  <!-- Custom scripts for new functionality -->
+  <script>
+    // Function to activate API Key
+    function activateAPI() {
+      // API activation logic here
+    }
+  </script>
+
+  <!-- Other scripts can be included as needed -->
 </body>
 
 </html>
