@@ -1,43 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Overworld Radio</title>
   <link rel="stylesheet" href="css/styles.css">
-  <!-- Keeping dark mode styling -->
   <style>
     body {
       background-color: #121212;
       color: #ffffff;
       font-family: 'Helvetica Neue', sans-serif;
     }
-
-    /* Additional styles here if needed */
+    #consoleDisplay {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      margin-top: 10px;
+      display: none;
+    }
+    #chatGPTResponse {
+      border: 1px solid #888888;
+      padding: 10px;
+      overflow-y: auto;
+      max-height: 300px;
+    }
   </style>
 </head>
 
 <body>
-  <h1 id="main-heading">Overworld Radio - Under Construction</h1>
+  <div id="consoleDisplay"></div>
 
-  <!-- Enter button - redirects to old site (placeholder for now) -->
-  <button onclick="window.location.href='old_index.html'">Enter if You Dare</button>
+  <div id="mainContent">
+    <h1 id="main-heading">Overworld Radio - Under Construction</h1>
+    <button onclick="window.location.href='old_index.html'">Enter if You Dare</button>
+    <p>Enter API Key:</p>
+    <input type="text" id="api-key">
+    <button onclick="activateAPI()">Activate</button>
+  </div>
 
-  <!-- API Prompt section -->
-  <p>Enter API Key:</p>
-  <input type="text" id="api-key">
-  <button onclick="activateAPI()">Activate</button>
+  <div id="chatGPTPlaceholder" style="display:none;">
+    <h2>Secret Accepted</h2>
+    <p>l o a d i n g ... y o !</p>
+  </div>
 
-  <!-- Custom scripts for new functionality -->
+  <div id="chatGPTInterface" style="display:none;">
+    <textarea id="userQuery"></textarea>
+    <button id="submitQuery">Submit</button>
+    <button onclick="toggleInputField()">Toggle Input Field</button>
+    <div id="chatGPTResponse"></div>
+  </div>
+  
   <script>
-    // Function to activate API Key
-    function activateAPI() {
-      // API activation logic here
+    function displayError(error) {
+      var consoleDiv = document.getElementById('consoleDisplay');
+      consoleDiv.style.display = 'block';
+      consoleDiv.innerText = 'Error: ' + error.message;
     }
+
+    function clearError() {
+      var consoleDiv = document.getElementById('consoleDisplay');
+      consoleDiv.style.display = 'none';
+      consoleDiv.innerText = '';
+    }
+
+    function isValidApiKey(key) {
+      return key && key.length > 0;
+    }
+
+    function toggleInputField() {
+      var userInputField = document.getElementById('userQuery');
+      userInputField.style.display = userInputField.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function activateAPI() {
+      try {
+        clearError();
+        const apiKey = document.getElementById('api-key').value;
+        if (!isValidApiKey(apiKey)) {
+          displayError({message: 'Invalid API key. Please enter a valid key.'});
+          return;
+        }
+
+        document.getElementById('mainContent').style.display = 'none';
+        document.getElementById('chatGPTPlaceholder').style.display = 'block';
+
+        setTimeout(function() {
+          document.getElementById('chatGPTPlaceholder').style.display = 'none';
+          document.getElementById('chatGPTInterface').style.display = 'block';
+        }, 2000);
+      } catch (error) {
+        displayError(error);
+      }
+    }
+
+    async function fetchChatGPTResponse(userInput) {
+      // Placeholder - integrate actual ChatGPT API logic here
+    }
+
+    document.getElementById('submitQuery').onclick = function() {
+      const userInput = document.getElementById('userQuery').value;
+      fetchChatGPTResponse(userInput)
+        .then(response => {
+          document.getElementById('chatGPTResponse').innerText = response;
+        })
+        .catch(error => {
+          displayError(error);
+        });
+    };
   </script>
-
-  <!-- Other scripts can be included as needed -->
 </body>
-
 </html>
