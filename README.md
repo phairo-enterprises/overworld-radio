@@ -1,9 +1,7 @@
-Version ID: 1.0.11
+Version ID: 1.0.12
 
 # Overworld Radio
 
 ## Upcoming Dates
-- November 11, 2023
-- December 25, 2023
-
-[More](./more.md)
+- December 1st
+- December 21st
