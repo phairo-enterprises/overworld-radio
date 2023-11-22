@@ -1,0 +1,89 @@
+/* Core Styling: Dark theme with a flair of sophistication */
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: 'Helvetica Neue', sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Main Content Styling: Center stage for Overworld Radio */
+#mainContent, #contentArea {
+  text-align: center;
+  border: 1px solid #888;
+  padding: 2em;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+}
+
+/* Header Styling: Bold and captivating */
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+/* Subtitle Styling: A dash of intrigue */
+.subtitle {
+  color: #BBBBBB;
+  font-style: italic;
+  margin-bottom: 1.5em;
+}
+
+/* Button Styling: Sleek and inviting */
+button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #444;
+}
+
+/* Input Field Styling: Chic and functional */
+input[type="text"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #888;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+/* Styling for the mystical headings */
+h1, h2, h3, h4 {
+  color: #FFD700; /* Golden text for headings */
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+/* Enhancing the paragraphs with a touch of elegance */
+p {
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+/* Adding a touch of enigma to horizontal rule */
+hr {
+  border: 1px solid #FFD700;
+  margin: 20px 0;
+}
+
+/* Style for strong elements to make them stand out */
+strong {
+  color: #FF4500; /* Vivid orange for bold text */
+}
+
+/* Italic texts are subtly highlighted */
+em {
+  color: #ADFF2F; /* Green text for emphasis */
+}
