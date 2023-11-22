@@ -6,107 +6,77 @@
   <title>Overworld Radio</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
+    /* Core Styling: Dark theme with a flair of sophistication */
     body {
       background-color: #121212;
       color: #ffffff;
       font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-    #consoleDisplay {
+
+    /* Main Content Styling: Center stage for Overworld Radio */
+    #mainContent {
+      text-align: center;
+      border: 1px solid #888;
+      padding: 2em;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+    }
+
+    /* Header Styling: Bold and captivating */
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+    }
+
+    /* Subtitle Styling: A dash of intrigue */
+    .subtitle {
+      color: #BBBBBB;
+      font-style: italic;
+      margin-bottom: 1.5em;
+    }
+
+    /* Button Styling: Sleek and inviting */
+    button {
       background-color: #333;
       color: #fff;
-      padding: 10px;
-      margin-top: 10px;
-      display: none;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
     }
-    #chatGPTResponse {
-      border: 1px solid #888888;
+    button:hover {
+      background-color: #444;
+    }
+
+    /* Input Field Styling: Chic and functional */
+    input[type="text"] {
       padding: 10px;
-      overflow-y: auto;
-      max-height: 300px;
+      border-radius: 5px;
+      border: 1px solid #888;
+      margin-bottom: 20px;
+      width: 80%;
     }
   </style>
 </head>
 
 <body>
-  <div id="consoleDisplay"></div>
-
   <div id="mainContent">
-    <h1 id="main-heading">Overworld Radio: Pirate Radio of the Gods</h1>
-    <button onclick="window.location.href='old_index.html'">Enter if You Dare</button>
+    <h1>Overworld Radio</h1>
+    <p class="subtitle">Pirate Radio of the Gods</p>
     <p>Enter API Key:</p>
     <input type="text" id="api-key">
+    <br>
     <button onclick="activateAPI()">Activate</button>
+    <button onclick="window.location.href='old_index.html'">Enter if You Dare</button>
   </div>
-
-  <div id="chatGPTPlaceholder" style="display:none;">
-    <h2>Secret Accepted</h2>
-    <p>l o a d i n g ... y o !</p>
-  </div>
-
-  <div id="chatGPTInterface" style="display:none;">
-    <textarea id="userQuery"></textarea>
-    <button id="submitQuery">Submit</button>
-    <button onclick="toggleInputField()">Toggle Input Field</button>
-    <div id="chatGPTResponse"></div>
-  </div>
-  
-  <script>
-    function displayError(error) {
-      var consoleDiv = document.getElementById('consoleDisplay');
-      consoleDiv.style.display = 'block';
-      consoleDiv.innerText = 'Error: ' + error.message;
-    }
-
-    function clearError() {
-      var consoleDiv = document.getElementById('consoleDisplay');
-      consoleDiv.style.display = 'none';
-      consoleDiv.innerText = '';
-    }
-
-    function isValidApiKey(key) {
-      return key && key.length > 0;
-    }
-
-    function toggleInputField() {
-      var userInputField = document.getElementById('userQuery');
-      userInputField.style.display = userInputField.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function activateAPI() {
-      try {
-        clearError();
-        const apiKey = document.getElementById('api-key').value;
-        if (!isValidApiKey(apiKey)) {
-          displayError({message: 'Invalid API key. Please enter a valid key.'});
-          return;
-        }
-
-        document.getElementById('mainContent').style.display = 'none';
-        document.getElementById('chatGPTPlaceholder').style.display = 'block';
-
-        setTimeout(function() {
-          document.getElementById('chatGPTPlaceholder').style.display = 'none';
-          document.getElementById('chatGPTInterface').style.display = 'block';
-        }, 2000);
-      } catch (error) {
-        displayError(error);
-      }
-    }
-
-    async function fetchChatGPTResponse(userInput) {
-      // Placeholder - integrate actual ChatGPT API logic here
-    }
-
-    document.getElementById('submitQuery').onclick = function() {
-      const userInput = document.getElementById('userQuery').value;
-      fetchChatGPTResponse(userInput)
-        .then(response => {
-          document.getElementById('chatGPTResponse').innerText = response;
-        })
-        .catch(error => {
-          displayError(error);
-        });
-    };
-  </script>
 </body>
 </html>
