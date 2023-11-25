@@ -24,14 +24,17 @@
             text-align: center;
             margin-bottom: 20px;
             max-width: 80vw; /* Adjusts width to viewport */
+            background-color: lightblue; /* Initial background color */
+            transition: background-color 0.3s; /* Smooth transition for color change */
+            overflow: hidden; /* Hide the overflow content */
+            height: 500px; /* Initial height of the image container */
         }
 
         /* Responsive image styling */
         .image-container img {
             max-width: 100%; /* Ensures image is not larger than container */
-            height: auto; /* Maintains aspect ratio */
+            height: 500px; /* Fixed height for image */
             border-radius: 10px; /* Optional: Adds rounded corners to the image */
-            background-color: lightblue;
         }
 
         /* Content area as a portal to the magical world */
@@ -86,7 +89,7 @@
 </head>
 
 <body>
-    <div class="image-container">
+    <div class="image-container" id="imageContainer">
         <img src="OWR_1-1.png" alt="Overworld Radio Image" />
     </div>
 
@@ -106,5 +109,27 @@
             <p>Matrix.org: <a href="https://matrix.to/#/@fightcorruption:matrix.org">https://matrix.to/#/@fightcorruption:matrix.org</a></p>
         </div>
     </div>
+
+    <script>
+        // Function to generate a random color
+        function getRandomColor() {
+            var colors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF', '#FFC6FF']; // Array of colors
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Change background color and crop image on scroll
+        window.onscroll = function() {
+            var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            var imageContainer = document.getElementById('imageContainer');
+            var img = imageContainer.querySelector('img');
+
+            // Change background color of the image container
+            imageContainer.style.backgroundColor = getRandomColor();
+
+            // Adjust the height of the image as you scroll
+            var newHeight = Math.max(300, 500 - scrollPosition * 0.5); // Min height: 300px, Max height starts at 500px
+            img.style.height = newHeight + 'px';
+        };
+    </script>
 </body>
 </html>
