@@ -6,9 +6,8 @@
   <title>Overworld Radio</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    /* Core Styling: Dark theme with a flair of sophistication */
     body {
-      background-color: #121212;
+      background-color: #000000;
       color: #ffffff;
       font-family: 'Helvetica Neue', sans-serif;
       margin: 0;
@@ -16,67 +15,170 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      transition: background-color 2s ease-in-out;
+      overflow: hidden;
     }
 
-    /* Main Content Styling: Center stage for Overworld Radio */
     #mainContent {
       text-align: center;
-      border: 1px solid #888;
+      border: 1px solid #444;
       padding: 2em;
       border-radius: 10px;
       background: rgba(255, 255, 255, 0.1);
-      box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.5);
       max-width: 500px;
+      opacity: 1;
+      transition: opacity 2s ease-in, transform 0.5s ease-out;
+      position: relative;
     }
 
-    /* Header Styling: Bold and captivating */
     h1 {
       font-size: 2.5em;
       margin-bottom: 0.5em;
+      color: #FF4500;
     }
 
-    /* Subtitle Styling: A dash of intrigue */
     .subtitle {
       color: #BBBBBB;
       font-style: italic;
       margin-bottom: 1.5em;
     }
 
-    /* Button Styling: Sleek and inviting */
     button {
-      background-color: #333;
+      background-color: #222;
       color: #fff;
       border: none;
       padding: 10px 20px;
       margin: 10px;
       border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.2s;
-    }
-    button:hover {
-      background-color: #444;
+      transition: background-color 0.2s, transform 0.2s;
     }
 
-    /* Input Field Styling: Chic and functional */
+    button:hover {
+      background-color: #333;
+      transform: scale(1.05);
+    }
+
     input[type="text"] {
       padding: 10px;
       border-radius: 5px;
-      border: 1px solid #888;
+      border: 1px solid #444;
       margin-bottom: 20px;
       width: 80%;
+    }
+
+    .ominous-text {
+      animation: flicker 1.5s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .background-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .background-animation div {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 69, 0, 0.5);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.5); opacity: 0.7; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    #resetButton {
+      display: none;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      padding: 20px 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    #resetButton:hover {
+      background-color: #555;
+      transform: scale(1.1);
+    }
+
+    #darkMessage {
+      display: none;
+      font-size: 2em;
+      color: #FF4500;
     }
   </style>
 </head>
 
 <body>
+  <div class="background-animation">
+    <div style="top: 10%; left: 20%;"></div>
+    <div style="top: 50%; left: 70%;"></div>
+    <div style="top: 80%; left: 30%;"></div>
+  </div>
+
   <div id="mainContent">
-    <h1>Overworld Radio</h1>
-    <p class="subtitle">Pirate Radio of the gods</p>
+    <h1 class="ominous-text">Overworld Radio</h1>
+    <p class="subtitle">Pirate Radio of the Gods</p>
     <p>Enter API Key (intelligence test, foo):</p>
     <input type="text" id="api-key">
     <br>
     <button onclick="activateAPI()">Activate</button>
     <button onclick="window.location.href='old_index.html'">Enter if You Dare</button>
   </div>
+
+  <button id="resetButton" onclick="resetPage()">Wake Up</button>
+  <div id="darkMessage">Awaken the Unknown...</div>
+
+  <script>
+    function activateAPI() {
+      alert('Activated. The Unknown Awaits...');
+    }
+
+    window.onload = function() {
+      setTimeout(function() {
+        triggerOminousAnimation();
+      }, 5000);
+    };
+
+    function triggerOminousAnimation() {
+      var mainContent = document.getElementById('mainContent');
+      mainContent.classList.add('animate');
+      document.body.style.backgroundColor = '#000000';
+      
+      var backgroundAnimation = document.querySelector('.background-animation');
+      backgroundAnimation.style.display = 'block';
+
+      setTimeout(function() {
+        mainContent.classList.add('ominous-text');
+        document.body.classList.add('ominous-text');
+      }, 30000);
+
+      setTimeout(function() {
+        mainContent.style.display = 'none';
+        document.getElementById('resetButton').style.display = 'block';
+        document.getElementById('darkMessage').style.display = 'block';
+      }, 75000);
+    }
+
+    function resetPage() {
+      location.reload();
+    }
+  </script>
 </body>
 </html>

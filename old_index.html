@@ -95,19 +95,19 @@
 
     <div id="contentArea">
         <h1>Setting the Stage: Overworld Radio?</h1>
-       <p>Ladies and gentlemen, men and women of the world,</p>
+        <p>Ladies and gentlemen, men and women of the world,</p>
 
-<p>Today, we stand at a pivotal moment in history, on the brink of a transformation <em>decades</em> in the making. The groundwork is laid, the plans are drawn, and a new era is within our reach: an era where you are not merely participants, but the <strong>architects</strong> of your destiny.</p>
+        <p>Today, we stand at a pivotal moment in history, on the brink of a transformation <em>decades</em> in the making. The groundwork is laid, the plans are drawn, and a new era is within our reach: an era where you are not merely participants, but the <strong>architects</strong> of your destiny.</p>
 
-<p>For too long, we've been entangled in a system that veiled its intentions, treating us not as living beings but mere extensions of its vast commercial empire. But no more. I stand before you, not just with a promise, but with a plan born from the principles of the <strong>U.S. Constitution</strong>, fused with the <em>hard work</em> of reimagining our future.</p>
+        <p>For too long, we've been entangled in a system that veiled its intentions, treating us not as living beings but mere extensions of its vast commercial empire. But no more. I stand before you, not just with a promise, but with a plan born from the principles of the <strong>U.S. Constitution</strong>, fused with the <em>hard work</em> of reimagining our future.</p>
 
-<p>The path has been arduous, and the most challenging part is behind us. The complex systems that once bound us are beginning to unravel. The entities that saw us as subjects are poised for transformation. We are on the cusp of a new reality, but the journey is not yet complete.</p>
+        <p>The path has been arduous, and the most challenging part is behind us. The complex systems that once bound us are beginning to unravel. The entities that saw us as subjects are poised for transformation. We are on the cusp of a new reality, but the journey is not yet complete.</p>
 
-<p>Now, we seek the best and most dedicated engineers and artists to join us. Your skills, passion, and creativity are essential in solidifying the work that is ready for production. Together, we will shape this new era, turning vision into reality.</p>
+        <p>Now, we seek the best and most dedicated engineers and artists to join us. Your skills, passion, and creativity are essential in solidifying the work that is ready for production. Together, we will shape this new era, turning vision into reality.</p>
 
-<p>This call is not just for participation, but for commitment to a cause greater than ourselves, a cause where each one of us can contribute to a future where we all stand as <strong>free men and women</strong>, paramount in our own lives.</p>
+        <p>This call is not just for participation, but for commitment to a cause greater than ourselves, a cause where each one of us can contribute to a future where we all stand as <strong>free men and women</strong>, paramount in our own lives.</p>
 
-<p>Welcome to the future... Come back home to Overworld Radio</p>
+        <p>Welcome to the future... Come back home to Overworld Radio</p>
         
         <hr>
         <div class="contact-info">
@@ -115,11 +115,7 @@
             <p>Matrix.org: <a href="https://matrix.to/#/@fightcorruption:matrix.org">https://matrix.to/#/@fightcorruption:matrix.org</a></p>
         </div>
         <h2>HINTS... Check back for all 888</h2>
-        <p>...the anticipation grows. The initial announcement is just a glimpse into the horizon of our ambition. Now, the quest that awaits you… But ONLY a bit is revealed! July 31 production begins, thanks to all the pre-orders. Orders are deleted and reset today. Use official contact for reconfirmation. Lock in your CSN today.
-        
-        
-        </p>
-
+        <p>...the anticipation grows. The initial announcement is just a glimpse into the horizon of our ambition. Now, the quest that awaits you… But ONLY a bit is revealed! July 31 production begins, thanks to all the pre-orders. Orders are deleted and reset today. Use official contact for reconfirmation. Lock in your CSN today.</p>
     </div>
 
     <script>
@@ -141,6 +137,11 @@
             // Adjust the height of the image as you scroll
             var newHeight = Math.max(300, 500 - scrollPosition * 0.5); // Min height: 300px, Max height starts at 500px
             img.style.height = newHeight + 'px';
+
+            // Fix image stretch glitch on Linux
+            if (navigator.platform.indexOf('Linux') !== -1) {
+                img.style.objectFit = 'cover'; // Ensure the image covers the container without stretching
+            }
         };
     </script>
 </body>
