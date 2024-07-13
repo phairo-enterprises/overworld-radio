@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Magic is real</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
@@ -17,6 +17,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden; /* Disable scrolling */
         }
 
         /* Image container */
@@ -85,6 +86,16 @@
             font-style: italic;
             color: #9ACD32; /* Yellow-green for contact info */
         }
+
+        /* Disable zoom */
+        body {
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
     </style>
 </head>
 
