@@ -29,6 +29,7 @@
             transition: background-color 0.3s; /* Smooth transition for color change */
             overflow: hidden; /* Hide the overflow content */
             height: 500px; /* Initial height of the image container */
+            position: relative;
         }
 
         /* Responsive image styling */
@@ -36,6 +37,7 @@
             max-width: 100%; /* Ensures image is not larger than container */
             height: 500px; /* Fixed height for image */
             border-radius: 10px; /* Optional: Adds rounded corners to the image */
+            transition: height 0.3s; /* Smooth transition for height change */
         }
 
         /* Content area as a portal to the magical world */
@@ -50,6 +52,7 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             color: #ffffff;
+            transition: transform 0.3s; /* Smooth transition for transform */
         }
 
         /* Styling for the mystical headings */
@@ -96,13 +99,12 @@
             user-select: none;
             -webkit-touch-callout: none;
         }
-
     </style>
 </head>
 
 <body>
     <div class="image-container" id="imageContainer">
-        <img src="OWR_1-1.png" alt="Overworld Radio Image" />
+        <img src="OWR_1-1.png" alt="Overworld Radio Image" id="image">
     </div>
 
     <div id="contentArea">
@@ -142,17 +144,18 @@
             var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
             var imageContainer = document.getElementById('imageContainer');
             var img = imageContainer.querySelector('img');
+            var contentArea = document.getElementById('contentArea');
 
             // Change background color of the image container
             imageContainer.style.backgroundColor = getRandomColor();
 
             // Adjust the height of the image as you scroll
-            var newHeight = Math.max(300, 500 - scrollPosition * 0.5); // Min height: 300px, Max height starts at 500px
-            img.style.height = newHeight + 'px';
-
-            // Fix image stretch glitch on Linux
-            if (navigator.platform.indexOf('Linux') !== -1) {
-                img.style.objectFit = 'cover'; // Ensure the image covers the container without stretching
+            if (scrollPosition > 100) {
+                img.style.height = '350px'; // Crop image by reducing height
+                contentArea.style.transform = 'translateY(-150px)'; // Move content up
+            } else {
+                img.style.height = '500px'; // Original height
+                contentArea.style.transform = 'translateY(0)';
             }
 
             // Hide image on scroll past 100px
@@ -161,6 +164,17 @@
             } else {
                 imageContainer.style.display = 'block';
             }
+        };
+
+        // Function to reset the image and content area on image click
+        document.getElementById('image').onclick = function() {
+            var imageContainer = document.getElementById('imageContainer');
+            var img = imageContainer.querySelector('img');
+            var contentArea = document.getElementById('contentArea');
+
+            img.style.height = '500px'; // Reset to original height
+            contentArea.style.transform = 'translateY(0)'; // Reset content position
+            imageContainer.style.display = 'block'; // Ensure image is visible
         };
     </script>
 </body>
