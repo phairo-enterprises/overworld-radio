@@ -43,6 +43,7 @@
             border: 2px solid #888888;
             padding: 20px;
             overflow-y: auto;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
             max-height: 60vh;
             width: 60vw;
             background-color: #222222;
@@ -152,6 +153,13 @@
             // Fix image stretch glitch on Linux
             if (navigator.platform.indexOf('Linux') !== -1) {
                 img.style.objectFit = 'cover'; // Ensure the image covers the container without stretching
+            }
+
+            // Hide image on scroll past 100px
+            if (scrollPosition > 100) {
+                imageContainer.style.display = 'none';
+            } else {
+                imageContainer.style.display = 'block';
             }
         };
     </script>
