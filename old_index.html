@@ -26,16 +26,18 @@
             margin-bottom: 20px;
             max-width: 80vw; /* Adjusts width to viewport */
             background-color: lightblue; /* Initial background color */
-            transition: background-color 0.3s; /* Smooth transition for color change */
+            transition: background-color 0.3s, height 0.3s; /* Smooth transition for color change */
             overflow: hidden; /* Hide the overflow content */
             height: 500px; /* Initial height of the image container */
+            position: relative;
         }
 
         /* Responsive image styling */
         .image-container img {
             max-width: 100%; /* Ensures image is not larger than container */
-            height: 500px; /* Fixed height for image */
+            height: 100%; /* Fixed height for image */
             border-radius: 10px; /* Optional: Adds rounded corners to the image */
+            transition: transform 0.3s; /* Smooth transition for image transformation */
         }
 
         /* Content area as a portal to the magical world */
@@ -50,6 +52,7 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             color: #ffffff;
+            transition: transform 0.3s; /* Smooth transition for content transformation */
         }
 
         /* Styling for the mystical headings */
@@ -96,7 +99,6 @@
             user-select: none;
             -webkit-touch-callout: none;
         }
-
     </style>
 </head>
 
@@ -131,37 +133,43 @@
     </div>
 
     <script>
+        const imageContainer = document.getElementById('imageContainer');
+        const contentArea = document.getElementById('contentArea');
+        const img = imageContainer.querySelector('img');
+        let isImageShrunk = false;
+
+        // Scroll event handler to trigger image shrink
+        contentArea.addEventListener('scroll', function() {
+            const scrollPosition = contentArea.scrollTop;
+            const threshold = contentArea.scrollHeight * 0.5;
+
+            if (scrollPosition > threshold && !isImageShrunk) {
+                imageContainer.style.height = '350px';
+                img.style.transform = 'translateY(-30%)';
+                contentArea.style.transform = 'translateY(-150px)';
+                isImageShrunk = true;
+            }
+        });
+
+        // Click event to reset the image and text position
+        imageContainer.addEventListener('click', function() {
+            if (isImageShrunk) {
+                imageContainer.style.height = '500px';
+                img.style.transform = 'translateY(0)';
+                isImageShrunk = false;
+            }
+        });
+
         // Function to generate a random color
         function getRandomColor() {
-            var colors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF', '#FFC6FF']; // Array of colors
+            const colors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF', '#FFC6FF']; // Array of colors
             return colors[Math.floor(Math.random() * colors.length)];
         }
 
-        // Change background color and crop image on scroll
-        window.onscroll = function() {
-            var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-            var imageContainer = document.getElementById('imageContainer');
-            var img = imageContainer.querySelector('img');
-
-            // Change background color of the image container
+        // Change background color on scroll
+        contentArea.addEventListener('scroll', function() {
             imageContainer.style.backgroundColor = getRandomColor();
-
-            // Adjust the height of the image as you scroll
-            var newHeight = Math.max(300, 500 - scrollPosition * 0.5); // Min height: 300px, Max height starts at 500px
-            img.style.height = newHeight + 'px';
-
-            // Fix image stretch glitch on Linux
-            if (navigator.platform.indexOf('Linux') !== -1) {
-                img.style.objectFit = 'cover'; // Ensure the image covers the container without stretching
-            }
-
-            // Hide image on scroll past 100px
-            if (scrollPosition > 100) {
-                imageContainer.style.display = 'none';
-            } else {
-                imageContainer.style.display = 'block';
-            }
-        };
+        });
     </script>
 </body>
 </html>
