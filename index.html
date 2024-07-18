@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Overworld Radio</title>
+  <title>Humble Bird - Nashville Hot Chicken</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
     body {
-      background-color: #000000;
-      color: #ffffff;
+      background-color: #f8b400;
+      color: #000000;
       font-family: 'Helvetica Neue', sans-serif;
       margin: 0;
       display: flex;
@@ -24,7 +24,7 @@
       border: 1px solid #444;
       padding: 2em;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.9);
       box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.5);
       max-width: 500px;
       opacity: 1;
@@ -35,17 +35,17 @@
     h1 {
       font-size: 2.5em;
       margin-bottom: 0.5em;
-      color: #FF4500;
+      color: #d32f2f;
     }
 
     .subtitle {
-      color: #BBBBBB;
+      color: #555555;
       font-style: italic;
       margin-bottom: 1.5em;
     }
 
     button {
-      background-color: #222;
+      background-color: #d32f2f;
       color: #fff;
       border: none;
       padding: 10px 20px;
@@ -56,25 +56,8 @@
     }
 
     button:hover {
-      background-color: #333;
+      background-color: #b71c1c;
       transform: scale(1.05);
-    }
-
-    input[type="text"] {
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #444;
-      margin-bottom: 20px;
-      width: 80%;
-    }
-
-    .ominous-text {
-      animation: flicker 1s infinite;
-    }
-
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
     }
 
     .background-animation {
@@ -91,7 +74,7 @@
       position: absolute;
       width: 50px;
       height: 50px;
-      background: rgba(255, 69, 0, 0.7);
+      background: rgba(211, 47, 47, 0.7);
       border-radius: 50%;
       animation: pulse 1.5s infinite;
     }
@@ -131,7 +114,7 @@
     #darkMessage {
       display: none;
       font-size: 2em;
-      color: #FF4500;
+      color: #d32f2f;
     }
   </style>
 </head>
@@ -147,23 +130,17 @@
   </div>
 
   <div id="mainContent">
-    <h1 class="ominous-text">Overworld Radio</h1>
-    <p class="subtitle">Pirate Radio of the Gods</p>
-    <p>Enter API Key (intelligence test, foo):</p>
-    <input type="text" id="api-key">
-    <br>
-    <button onclick="activateAPI()">Activate</button>
-    <button onclick="window.location.href='old_index.html'">Enter if You Dare</button>
+    <h1 class="ominous-text">Humble Bird</h1>
+    <p class="subtitle">Nashville Hot Chicken</p>
+    <p>Spicy Flavor Explosion Awaits!</p>
+    <button onclick="window.location.href='old_index.html'">About Us</button>
+    <button onclick="window.location.href='humblebird.square.site'">Order Now</button>
   </div>
 
-  <button id="resetButton" onclick="resetPage()">Wake Up</button>
-  <div id="darkMessage">Awaken the Unknown...</div>
+  <button id="resetButton" onclick="resetPage()">Reset</button>
+  <div id="darkMessage">Hot Chicken Awaits...</div>
 
   <script>
-    function activateAPI() {
-      alert('Activated. The Unknown Awaits...');
-    }
-
     function generateRandomPosition() {
       return {
         top: Math.random() * 100 + '%',
