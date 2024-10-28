@@ -3,112 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Magic is real</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Magic is Real - BackupStrats.com</title>
     <style>
-        /* Dark mode magic with a mystical twist */
         body {
             background-color: #121212;
             color: #ffffff;
             font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden; /* Disable scrolling */
         }
 
-        /* Image container */
         .image-container {
-            text-align: center;
-            margin-bottom: 20px;
-            max-width: 95vw; /* Adjusts width to viewport */
-            background-color: lightblue; /* Initial background color */
-            transition: background-color 0.3s, height 0.3s; /* Smooth transition for color change */
-            overflow: hidden; /* Hide the overflow content */
-            height: 500px; /* Initial height of the image container */
-            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 300px;
+            margin: 0 auto 20px;
+            background-color: lightblue;
+            transition: background-color 0.3s, height 0.3s;
+            overflow: hidden;
+            border-radius: 10px;
         }
 
-        /* Responsive image styling */
         .image-container img {
-            max-width: 100%; /* Ensures image is not larger than container */
-            height: 100%; /* Fixed height for image */
-            border-radius: 10px; /* Optional: Adds rounded corners to the image */
-            transition: transform 0.3s; /* Smooth transition for image transformation */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
         }
 
-        /* Content area as a portal to the magical world */
         #contentArea {
             border: 2px solid #888888;
             padding: 20px;
             overflow-y: auto;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
             max-height: 60vh;
-            width: 95vw;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
             background-color: #222222;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            color: #ffffff;
-            transition: transform 0.3s; /* Smooth transition for content transformation */
         }
 
-        /* Styling for the mystical headings */
         h1, h2, h3, h4 {
-            color: #FFD700; /* Golden text for headings */
+            color: #FFD700;
             margin-top: 0.5em;
             margin-bottom: 0.5em;
         }
 
-        /* Enhancing the paragraphs with a touch of elegance */
         p {
             font-size: 1.1em;
             line-height: 1.6;
         }
 
-        /* Adding a touch of enigma to horizontal rule */
         hr {
             border: 1px solid #FFD700;
             margin: 20px 0;
         }
 
-        /* Style for strong elements to make them stand out */
         strong {
-            color: #FF4500; /* Vivid orange for bold text */
+            color: #FF4500;
         }
 
-        /* Italic texts are subtly highlighted */
         em {
-            color: #ADFF2F; /* Green text for emphasis */
+            color: #ADFF2F;
         }
 
-        /* Contact info styling */
         .contact-info {
             margin-top: 20px;
             font-style: italic;
-            color: #9ACD32; /* Yellow-green for contact info */
+            color: #9ACD32;
         }
 
-        /* Disable zoom */
-        body {
-            touch-action: manipulation;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
+        .nav-toolbar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            padding: 15px;
+            background-color: rgba(34, 34, 34, 0.8);
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .movement-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .nav-button {
+            width: 50px;
+            height: 50px;
+            background-color: #444;
+            color: white;
+            font-weight: bold;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .nav-up { background-color: #ff6961; }
+        .nav-down { background-color: #77dd77; }
+        .nav-left { background-color: #779ecb; }
+        .nav-right { background-color: #fdfd96; }
+        .nav-in { background-color: #ffb347; }
+        .nav-out { background-color: #cab2ff; }
+
+        .minimap, .trackpad {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid #888;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .control-panel {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .control-panel label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .control-panel input {
+            width: 100%;
         }
     </style>
 </head>
-
 <body>
     <div class="image-container" id="imageContainer">
-        <img src="OWR_1-1.png" alt="Overworld Radio Image" />
+        <img src="https://via.placeholder.com/800x300.png?text=Backup+Strats+Image" alt="Backup Strats Image" />
     </div>
 
     <div id="contentArea">
-        <h1>Overworldrad.io is moving to BackupStrats.com</h1>
+        <h1>BackupStrats.com</h1>
         <p>Players, creators and all those who inhabit the world</p>
 
         <p>Today, we stand at a pivotal moment in history, on the brink of a transformation <em>decades</em> in the making. The groundwork is laid, the plans are drawn, and a new era is within our reach: an era where you are not merely participants, but the <strong>architects</strong> of your destiny.</p>
@@ -121,15 +166,36 @@
 
         <p>This call is not just for participation, but for commitment to a cause greater than ourselves, a cause where each one of us can contribute to a future where we all stand as <strong>free players and creators</strong>, paramount in our own lives.</p>
 
-        <p>Welcome to the future... Come back home to Overworld Radio</p>
+        <p>Welcome to the future... a secret mention to Overworld Radio.</p>
         
         <hr>
         <div class="contact-info">
             <p>For contact inquiries, we only operate via private messaging systems of the highest standards. For now, we use the official Matrix server for Element. Soon, we will operate our own private server to maintain even higher standards.</p>
-            <p>Matrix.org: <a href="https://matrix.to/#/@fightcorruption:matrix.org">https://matrix.to/#/@fightcorruption:matrix.org</a></p>
+            <p>Matrix.org: <a href="https://matrix.to/#/@fightcorruption:matrix.org" style="color: #9ACD32;">https://matrix.to/#/@fightcorruption:matrix.org</a></p>
         </div>
         <h2>BackupStrats.com</h2>
         <p>...the anticipation grows. The initial announcement is just a glimpse into the horizon of our ambition. Now, the quest that awaits on BackupStrats.com</p>
+    </div>
+
+    <div class="nav-toolbar" id="navToolbar">
+        <div class="movement-controls">
+            <button class="nav-button nav-up" onclick="move('up')">^</button>
+            <button class="nav-button nav-left" onclick="move('left')"><</button>
+            <button class="nav-button nav-right" onclick="move('right')">></button>
+            <button class="nav-button nav-down" onclick="move('down')">v</button>
+            <button class="nav-button nav-in" onclick="move('in')">+</button>
+            <button class="nav-button nav-out" onclick="move('out')">-</button>
+        </div>
+
+        <div class="minimap" id="minimap">Minimap</div>
+        <div class="trackpad" id="trackpad">Trackpad</div>
+
+        <div class="control-panel">
+            <label for="toolbarSize">Size: </label>
+            <input type="range" id="toolbarSize" min="50" max="300" value="200">
+            <label for="toolbarOpacity">Opacity: </label>
+            <input type="range" id="toolbarOpacity" min="0.2" max="1" step="0.1" value="0.8">
+        </div>
     </div>
 
     <script>
@@ -138,37 +204,49 @@
         const img = imageContainer.querySelector('img');
         let isImageShrunk = false;
 
-        // Scroll event handler to trigger image shrink
         contentArea.addEventListener('scroll', function() {
             const scrollPosition = contentArea.scrollTop;
             const threshold = contentArea.scrollHeight * 0.5;
 
             if (scrollPosition > threshold && !isImageShrunk) {
-                imageContainer.style.height = '350px';
+                imageContainer.style.height = '150px';
                 img.style.transform = 'translateY(-30%)';
-                contentArea.style.transform = 'translateY(-150px)';
                 isImageShrunk = true;
+            } else if (scrollPosition <= threshold && isImageShrunk) {
+                imageContainer.style.height = '300px';
+                img.style.transform = 'translateY(0)';
+                isImageShrunk = false;
             }
+            
+            imageContainer.style.backgroundColor = getRandomColor();
         });
 
-        // Click event to reset the image and text position
         imageContainer.addEventListener('click', function() {
             if (isImageShrunk) {
-                imageContainer.style.height = '500px';
+                imageContainer.style.height = '300px';
                 img.style.transform = 'translateY(0)';
                 isImageShrunk = false;
             }
         });
 
-        // Function to generate a random color
         function getRandomColor() {
-            const colors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF', '#FFC6FF']; // Array of colors
+            const colors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF', '#FFC6FF'];
             return colors[Math.floor(Math.random() * colors.length)];
         }
 
-        // Change background color on scroll
-        contentArea.addEventListener('scroll', function() {
-            imageContainer.style.backgroundColor = getRandomColor();
+        function move(direction) {
+            console.log(`Move: ${direction}`);
+        }
+
+        document.getElementById('toolbarSize').addEventListener('input', function() {
+            const toolbar = document.getElementById('navToolbar');
+            const size = this.value + 'px';
+            toolbar.style.width = size;
+        });
+
+        document.getElementById('toolbarOpacity').addEventListener('input', function() {
+            const toolbar = document.getElementById('navToolbar');
+            toolbar.style.backgroundColor = `rgba(34, 34, 34, ${this.value})`;
         });
     </script>
 </body>
