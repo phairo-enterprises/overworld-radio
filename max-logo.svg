@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Letter M -->
+  <!-- Aims for a blocky, sans-serif M. Stroke width gives thickness. -->
+  <!-- Coordinates are (x,y) -->
+  <polyline points="15,85 15,15 35,55 55,15 55,85"
+            fill="none" 
+            stroke="#CCCCCC" 
+            stroke-width="10" 
+            stroke-linejoin="miter" 
+            stroke-linecap="butt" />
+</svg>
