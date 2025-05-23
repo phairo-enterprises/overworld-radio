@@ -1,89 +1,405 @@
-/* Core Styling: Dark theme with a flair of sophistication */
+/* Global Settings & Body */
 body {
-  background-color: #121212;
-  color: #ffffff;
-  font-family: 'Helvetica Neue', sans-serif;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+    background-color: #000000; /* Default black background */
+    color: #FFFFFF; /* Default white text */
+    font-family: 'Helvetica Neue', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background-color 1s ease-in-out;
+    overflow: hidden;
 }
 
-/* Main Content Styling: Center stage for Overworld Radio */
-#mainContent, #contentArea {
-  text-align: center;
-  border: 1px solid #888;
-  padding: 2em;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
+/* Main Content Wrapper */
+#mainContent {
+    text-align: center;
+    padding: 1em; /* Reduced padding as rpgTextBox has its own */
+    border-radius: 10px;
+    background: transparent;
+    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.5); /* Retained for overall depth */
+    max-width: 600px; /* Slightly increased max-width */
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Ensure main content is above destroyed elements */
+    position: relative; /* Needed for z-index to apply correctly against fixed/absolute children if they also had z-index */
 }
 
-/* Header Styling: Bold and captivating */
-h1 {
-  font-size: 2.5em;
-  margin-bottom: 0.5em;
+/* RPG Text Box - Core UI Element */
+#rpgTextBox {
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for retro feel */
+    border: 2px solid #444; /* Slightly thicker border, initial state */
+    padding: 25px; /* Increased padding */
+    min-width: 350px; /* Increased min-width */
+    min-height: 150px; /* Increased min-height */
+    background-color: rgba(10, 10, 10, 0.85); /* Dark, slightly more opaque background */
+    border-radius: 8px; /* Slightly larger radius */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+    color: #FFFFFF;
+    box-shadow: 0 0 5px rgba(0,0,0,0.7); /* Default subtle shadow */
+}
+/* When site is awake, rpgTextBox gets an accent shadow */
+body[data-theme="awake"] #rpgTextBox {
+    border-color: #00FFFF; /* Accent color border when awake */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Cyan glow when awake */
 }
 
-/* Subtitle Styling: A dash of intrigue */
-.subtitle {
+/* Activity Indicator (Blinking Cursor) */
+#activityIndicator {
+    font-family: monospace; /* Explicitly monospace */
+    font-size: 1.5em; /* Larger for better visibility */
+    color: #FFFFFF; /* Bright white */
+    display: inline;
+    text-shadow: 0 0 3px #FFFFFF; /* Slight glow to make it sharper */
+}
+
+/* Options Container & Individual Options */
+#optionsContainer {
+    display: none; /* Initially hidden */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    margin-top: 20px; /* Increased margin */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px; /* Increased gap */
+    width: 90%; /* Wider options relative to rpgTextBox */
+}
+
+#optionsContainer div {
+    font-family: 'Lucida Console', Monaco, monospace; /* Monospace/blocky font for options */
+    cursor: pointer;
+    padding: 12px; /* Increased padding */
+    border: 1px solid #555;
+    border-radius: 4px;
+    color: #E0E0E0; /* Slightly off-white for options text */
+    background-color: rgba(30, 30, 30, 0.8);
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
+    font-size: 1em;
+    line-height: 1.4; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+}
+
+.svg-placeholder {
+    display: block;
+    margin-bottom: 8px; 
+    font-size: 0.75em; 
+    color: #999; 
+    line-height: 1;
+}
+
+#optionsContainer div .svg-placeholder span { /* Style for the emoji */
+    filter: grayscale(100%);
+    opacity: 0.6;
+    font-size: 1.8em; 
+    display: inline-block; 
+    transition: filter 0.3s, opacity 0.3s;
+}
+
+#optionsContainer div:hover {
+    background-color: rgba(0, 100, 100, 0.7); 
+    border-color: #00FFFF; 
+    color: #FFFFFF; 
+    transform: scale(1.02); 
+}
+#optionsContainer div:hover .svg-placeholder {
+    color: #B0E0E6; 
+}
+#optionsContainer div:hover .svg-placeholder span {
+    filter: grayscale(0%); 
+    opacity: 1;
+}
+
+#optionsContainer div:active {
+    background-color: rgba(0, 150, 150, 0.9); 
+    transform: scale(1); 
+}
+
+/* Download Link Container & Link */
+#downloadLinkContainer {
+    display: none; 
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#downloadLinkContainer a {
+    font-family: 'Lucida Console', Monaco, monospace; 
+    color: #00FFFF; 
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    border: 1px solid #00FFFF;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s, text-shadow 0.3s;
+}
+
+#downloadLinkContainer a:hover {
+    background-color: rgba(0, 255, 255, 0.2); 
+    color: #FFFFFF;
+    text-decoration: underline;
+    text-shadow: 0 0 5px #00FFFF; 
+}
+
+/* Destroyed UI Placeholders */
+#destroyedBackgroundElementsContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+    z-index: 1; /* Above background effects, below mainContent */
+    overflow: hidden;
+}
+
+#brokenNavRemnants, #shatteredFrame {
+    color: #333; 
+    font-family: monospace;
+    font-size: 0.8em;
+    /* Inline styles in HTML already set position, opacity, and basic border for #shatteredFrame */
+}
+
+#brokenNavRemnants::before {
+    content: "[Λ] [<] [>] [V] [+] [-]"; 
+    letter-spacing: 2px;
+    padding: 5px;
+    border: 1px dashed #333; /* Added border for visibility */
+    border-radius: 3px;
+}
+
+#shatteredFrame::before {
+    content: "Error: Frame Corrupted [|||||||]";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    color: #222; /* Even fainter text inside */
+}
+
+/* Typographic Styles (for potential future content) */
+h1, h2, h3, h4 {
+    color: #FFD700; 
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-family: 'Helvetica Neue', sans-serif; 
+}
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.8em; }
+h3 { font-size: 1.5em; }
+h4 { font-size: 1.2em; }
+
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    font-family: 'Helvetica Neue', sans-serif; 
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #FFD700; 
+    margin: 20px 0;
+}
+
+strong {
+    color: #FF4500; 
+    font-weight: bold;
+}
+
+em {
+    color: #ADFF2F; 
+    font-style: italic;
+}
+
+/* Background Animation & Effects */
+.background-animation { /* Pulsing orbs */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1; /* Behind #destroyedBackgroundElementsContainer */
+}
+
+.background-animation div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 69, 0, 0.25); 
+    border-radius: 50%;
+    animation: pulse 2.5s infinite alternate ease-in-out; 
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.5) rotate(0deg); opacity: 0.2; }
+  100% { transform: scale(1) rotate(180deg); opacity: 0.5; } 
+}
+
+.background-effect { /* Fullscreen effect layer */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+    z-index: -2; /* Furthest behind */
+    transition: opacity 1s ease-in-out;
+}
+
+.subtitle { 
   color: #BBBBBB;
   font-style: italic;
   margin-bottom: 1.5em;
 }
 
-/* Button Styling: Sleek and inviting */
-button {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
-button:hover {
-  background-color: #444;
+/* Light Mode Specific Styles */
+body[data-theme="light"] {
+    background-color: #E0E0E0; 
+    color: #121212; 
 }
 
-/* Input Field Styling: Chic and functional */
-input[type="text"] {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #888;
-  margin-bottom: 20px;
-  width: 80%;
+body[data-theme="light"] #rpgTextBox {
+    background-color: rgba(250, 250, 250, 0.9); 
+    border-color: #333333; 
+    color: #121212; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
 }
 
-/* Styling for the mystical headings */
-h1, h2, h3, h4 {
-  color: #FFD700; /* Golden text for headings */
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+body[data-theme="light"] #activityIndicator {
+    color: #121212;
+    text-shadow: none;
 }
 
-/* Enhancing the paragraphs with a touch of elegance */
-p {
-  font-size: 1.1em;
-  line-height: 1.6;
+body[data-theme="light"] #optionsContainer div {
+    background-color: rgba(220, 220, 220, 0.8);
+    border-color: #777777;
+    color: #121212;
+}
+body[data-theme="light"] #optionsContainer div .svg-placeholder {
+    color: #555;
+}
+body[data-theme="light"] #optionsContainer div .svg-placeholder span {
+    opacity: 0.8; /* Slightly less intense emoji in light mode */
 }
 
-/* Adding a touch of enigma to horizontal rule */
-hr {
-  border: 1px solid #FFD700;
-  margin: 20px 0;
+body[data-theme="light"] #optionsContainer div:hover {
+    background-color: rgba(0, 120, 120, 0.7); 
+    border-color: #008080; 
+    color: #FFFFFF;
+}
+body[data-theme="light"] #optionsContainer div:hover .svg-placeholder {
+    color: #007070; 
+}
+body[data-theme="light"] #optionsContainer div:hover .svg-placeholder span {
+    filter: grayscale(0%);
+    opacity: 1;
 }
 
-/* Style for strong elements to make them stand out */
-strong {
-  color: #FF4500; /* Vivid orange for bold text */
+body[data-theme="light"] #downloadLinkContainer a {
+    color: #006060; 
+    border-color: #008080;
 }
 
-/* Italic texts are subtly highlighted */
-em {
-  color: #ADFF2F; /* Green text for emphasis */
+body[data-theme="light"] #downloadLinkContainer a:hover {
+    background-color: rgba(0, 100, 100, 0.2);
+    color: #000000;
+    text-shadow: 0 0 5px #008080;
 }
+
+/* Awake State Specific Styles (ACCENT_COLOR body) */
+body[data-theme="awake"] {
+    color: #121212; /* Dark text when body is Cyan */
+}
+
+body[data-theme="awake"] #rpgTextBox {
+    color: #121212; 
+    border-color: #00FFFF; /* Already defined but ensure it's here */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Already defined */
+}
+body[data-theme="awake"] #activityIndicator {
+    color: #121212; 
+}
+
+body[data-theme="awake"] #optionsContainer div {
+    color: #121212; 
+}
+body[data-theme="awake"] #optionsContainer div .svg-placeholder {
+    color: #005555; /* Darker placeholder text for visibility on cyan */
+}
+
+body[data-theme="awake"] #optionsContainer div:hover {
+    background-color: rgba(200, 255, 255, 0.8); 
+    color: #000000;
+}
+body[data-theme="awake"] #optionsContainer div:hover .svg-placeholder {
+    color: #004444; 
+}
+body[data-theme="awake"] #optionsContainer div:hover .svg-placeholder span {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+body[data-theme="awake"] #downloadLinkContainer a {
+     color: #003333; 
+}
+body[data-theme="awake"] #downloadLinkContainer a:hover {
+    color: #000000;
+}
+
+/* Light + Awake Combination Styles */
+body[data-theme="light"][data-theme="awake"] {
+    color: #121212; /* Awake state (cyan body) overrides light mode body color */
+}
+
+body[data-theme="light"][data-theme="awake"] #rpgTextBox {
+    background-color: rgba(220, 255, 255, 0.85); /* Light cyan box */
+    border-color: #008080; 
+    color: #121212;
+    box-shadow: 0 0 15px rgba(0, 180, 180, 0.6);
+}
+
+body[data-theme="light"][data-theme="awake"] #optionsContainer div {
+    color: #121212;
+}
+body[data-theme="light"][data-theme="awake"] #optionsContainer div .svg-placeholder {
+    color: #004444; /* Darker placeholder for light-awake */
+}
+
+body[data-theme="light"][data-theme="awake"] #optionsContainer div:hover {
+    background-color: rgba(180, 255, 255, 0.9);
+    color: #000000;
+}
+body[data-theme="light"][data-theme="awake"] #optionsContainer div:hover .svg-placeholder {
+    color: #003333; 
+}
+body[data-theme="light"][data-theme="awake"] #optionsContainer div:hover .svg-placeholder span {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+body[data-theme="light"][data-theme="awake"] #downloadLinkContainer a {
+    color: #003333;
+}
+body[data-theme="light"][data-theme="awake"] #downloadLinkContainer a:hover {
+    color: #000000;
+}
+```

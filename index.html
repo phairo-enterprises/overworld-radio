@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Overworld Radio</title>
+  <title>BackupStrats.com</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
     body {
@@ -22,6 +22,7 @@
     #mainContent {
       text-align: center;
       border: 1px solid #444;
+      display: none; /* Initially hidden */
       padding: 2em;
       border-radius: 10px;
       background: rgba(255, 255, 255, 0.1);
@@ -146,19 +147,41 @@
     <div></div>
   </div>
 
-  <div id="mainContent">
-    <h1 class="ominous-text">Overworld Radio</h1>
-    <p class="subtitle">A New Realm Awaits</p>
-    <p>Relocating to BackupStrats.com</p>
-    <input type="text" id="api-key">
-    <br>
-    <button onclick="activateAPI()">Activate</button>
-    <button onclick="window.location.href='old_index.html'">Enter if You Dare</button>
+  <div id="destroyedBackgroundElementsContainer">
+    <!-- Placeholder for subtle, moving geometric wireframes (digital decay) -->
+    <!-- Placeholder for occasional glitch effect overlays -->
+    <!-- Placeholder for fragmented text from inspiration.txt appearing faintly -->
+
+    <div id="brokenNavRemnants" style="position: absolute; top: 10px; left: 10px; opacity: 0.3;">
+         <!-- Old nav buttons as broken icons: e.g., [^] [<] [>] [v] [+] [-] but stylized as fragmented/decayed -->
+         <!-- Non-interactive, decayed symbols -->
+    </div>
+
+    <div id="shatteredFrame" style="position: absolute; bottom: 10px; right: 10px; width: 150px; height: 100px; border: 2px dashed #555; opacity: 0.3;">
+        <!-- Placeholder for a shattered/corrupted low-poly image frame displaying static/noise -->
+    </div>
   </div>
 
-  <button id="resetButton" onclick="resetPage()">Wake Up</button>
-  <div id="darkMessage">Awaken BackupStrats.com</div>
+  <div id="mainContent">
+    <div id="rpgTextBox">
+      <span id="activityIndicator">_</span>
+      <div id="optionsContainer">
+        <div id="lightModeOption">
+            <span class="svg-placeholder">[<span style="font-size: 20px;">☀️</span> LGT]</span> <!-- Simple sun emoji placeholder -->
+            Light Mode
+        </div>
+        <div id="downloadOption">
+            <span class="svg-placeholder">[<span style="font-size: 20px;">💾</span> DL]</span> <!-- Simple disk emoji placeholder -->
+            Download
+        </div>
+      </div>
+      <div id="downloadLinkContainer">
+        <!-- Download link will appear here -->
+      </div>
+    </div>
+  </div>
 
+  <script src="js/backupstrats-ui.js"></script>
   <script>
     function activateAPI() {
       alert('Activated. Welcome to BackupStrats.com...');
@@ -179,66 +202,66 @@
 
     function triggerOminousAnimation() {
       var mainContent = document.getElementById('mainContent');
-      mainContent.classList.add('animate');
+      // mainContent.classList.add('animate'); // Keep this commented or remove if not used soon
       document.body.style.backgroundColor = '#000000';
 
       var backgroundAnimation = document.querySelector('.background-animation');
-      backgroundAnimation.style.display = 'block';
+      // backgroundAnimation.style.display = 'block'; // Keep this commented or remove if not used soon
 
-      function createOrbs(count) {
-        for (let i = 0; i < count; i++) {
-          var orb = document.createElement('div');
-          var positions = generateRandomPosition();
-          orb.style.top = positions.top;
-          orb.style.left = positions.left;
-          backgroundAnimation.appendChild(orb);
-          orb.addEventListener('animationiteration', function() {
-            var newPosition = generateRandomPosition();
-            orb.style.top = newPosition.top;
-            orb.style.left = newPosition.left;
-          });
-        }
-      }
+      // function createOrbs(count) {
+      //   for (let i = 0; i < count; i++) {
+      //     var orb = document.createElement('div');
+      //     var positions = generateRandomPosition();
+      //     orb.style.top = positions.top;
+      //     orb.style.left = positions.left;
+      //     backgroundAnimation.appendChild(orb);
+      //     orb.addEventListener('animationiteration', function() {
+      //       var newPosition = generateRandomPosition();
+      //       orb.style.top = newPosition.top;
+      //       orb.style.left = newPosition.left;
+      //     });
+      //   }
+      // }
 
-      function phaseTransition(newCount) {
-        backgroundAnimation.innerHTML = '';
-        createOrbs(newCount);
-      }
+      // function phaseTransition(newCount) {
+      //   backgroundAnimation.innerHTML = '';
+      //   createOrbs(newCount);
+      // }
 
-      var initialOrbs = Math.floor(Math.random() * (30 - 5 + 1)) + 5;
-      createOrbs(initialOrbs);
+      // var initialOrbs = Math.floor(Math.random() * (30 - 5 + 1)) + 5;
+      // createOrbs(initialOrbs);
 
-      setTimeout(function() {
-        mainContent.classList.add('ominous-text');
-        document.body.classList.add('ominous-text');
-        phaseTransition(initialOrbs + 4);
-      }, 20000);
+      // setTimeout(function() {
+      //   mainContent.classList.add('ominous-text');
+      //   document.body.classList.add('ominous-text');
+      //   phaseTransition(initialOrbs + 4);
+      // }, 20000);
 
-      setTimeout(function() {
-        phaseTransition(initialOrbs + 8);
-        document.querySelector('.background-effect').style.opacity = 0.1;
-      }, 35000);
+      // setTimeout(function() {
+      //   phaseTransition(initialOrbs + 8);
+      //   document.querySelector('.background-effect').style.opacity = 0.1;
+      // }, 35000);
 
-      setTimeout(function() {
-        phaseTransition(initialOrbs + 12);
-        document.querySelector('.background-effect').style.opacity = 0.2;
-      }, 45000);
+      // setTimeout(function() {
+      //   phaseTransition(initialOrbs + 12);
+      //   document.querySelector('.background-effect').style.opacity = 0.2;
+      // }, 45000);
 
-      setTimeout(function() {
-        mainContent.style.display = 'none';
-        document.getElementById('resetButton').style.display = 'block';
-        document.getElementById('darkMessage').style.display = 'block';
-        document.querySelector('.background-effect').style.opacity = 1;
-        var backgrounds = ['#000000', '#FF0000', '#FFFF00', '#FFFFFF', 'linear-gradient(45deg, black, white, yellow, red)'];
-        setInterval(function() {
-          document.querySelector('.background-effect').style.background = backgrounds[Math.floor(Math.random() * 100) < 90 ? 0 : Math.floor(Math.random() * 5)];
-        }, 1000);
-      }, 55000);
+      // setTimeout(function() {
+      //   // mainContent.style.display = 'none'; // mainContent is already hidden by default
+      //   // document.getElementById('resetButton').style.display = 'block'; // Removed
+      //   // document.getElementById('darkMessage').style.display = 'block'; // Removed
+      //   document.querySelector('.background-effect').style.opacity = 1;
+      //   var backgrounds = ['#000000', '#FF0000', '#FFFF00', '#FFFFFF', 'linear-gradient(45deg, black, white, yellow, red)'];
+      //   setInterval(function() {
+      //     document.querySelector('.background-effect').style.background = backgrounds[Math.floor(Math.random() * 100) < 90 ? 0 : Math.floor(Math.random() * 5)];
+      //   }, 1000);
+      // }, 55000);
     }
 
-    function resetPage() {
-      location.reload();
-    }
+    // function resetPage() { // Removed
+    //   location.reload();
+    // }
   </script>
 </body>
 </html>

@@ -1,0 +1,58 @@
+Content from old_index.html:
+
+Themes & Concepts:
+- New Era & Transformation: "Today, we stand at a pivotal moment in history, on the brink of a transformation decades in the making.", "a new era is within our reach", "We are on the cusp of a new reality"
+- Architects of Destiny: "an era where you are not merely participants, but the architects of your destiny."
+- Call for Engineers/Artists: "Now, we seek the best and most dedicated engineers and artists to join us. Your skills, passion, and creativity are essential in solidifying the work that is ready for production."
+- Freedom & Empowerment: "a cause where each one of us can contribute to a future where we all stand as free players and creators, paramount in our own lives."
+- Overcoming Old Systems: "For too long, we've been entangled in a system that veiled its intentions, treating us not as living beings but mere extensions of its vast commercial empire. But no more.", "The complex systems that once bound us are beginning to unravel."
+- Constitutional Principles & Hard Work: "a plan born from the principles of the U.S. Constitution, fused with the hard work of reimagining our future."
+
+Evocative Statements:
+- "The groundwork is laid, the plans are drawn, and a new era is within our reach"
+- "The most challenging part is behind us."
+- "Together, we will shape this new era, turning vision into reality."
+- "Welcome to the future..."
+
+Phrases:
+- "pivotal moment in history"
+- "brink of a transformation"
+- "architects of your destiny"
+- "U.S. Constitution"
+- "hard work"
+- "reimagining our future"
+- "complex systems"
+- "free players and creators"
+- "Overworld Radio" (secret mention)
+
+---
+
+Content from MD/splash.md:
+
+Themes & Concepts:
+- Groundbreaking Journey & Innovation: "inviting you to join a groundbreaking journey in innovation and creativity.", "Each one will be a bold step into uncharted territories of entertainment and far beyond to technology, manufacturing, and much more."
+- New Era & Future Offerings: "December 21st marks the beginning of a new era in storytelling and technological prowess", "igniting your imagination and setting high expectations, without unveiling the full magnitude of our future offerings."
+- Blending Familiar with New: "We're blending familiar elements with groundbreaking concepts, all meticulously engineered to push the boundaries of human experiences."
+- Grand Vision & Continuous Development: "these eight updates are just the initial phase of our grand vision. We are committed to continuously pushing the limits of technology and storytelling."
+- Secrecy & Anticipation: "While there may be whispers and leaks, our official stance is clear: no further major reveals will happen for at least a year following these updates.", "Behind the scenes, more intense revelations are brewing. For the sake of our grand vision, we must keep these hush hush for a while."
+
+Evocative Statements:
+- "Setting the Stage for a Digital Revolution"
+- "launch a fire-filled series of teasers"
+- "a bold step into uncharted territories"
+- "push the boundaries of human experiences"
+- "Overworldrad.io is not just promising change; we are crafting it, step by definitive step."
+
+Phrases:
+- "Digital Revolution"
+- "fire-filled series of teasers"
+- "groundbreaking journey"
+- "innovation and creativity"
+- "uncharted territories"
+- "meticulously engineered"
+- "boundaries of human experiences"
+- "initial phase of our grand vision"
+- "limits of technology and storytelling"
+- "intense revelations are brewing"
+- "crafting it, step by definitive step"
+- "Overworldrad.io"
