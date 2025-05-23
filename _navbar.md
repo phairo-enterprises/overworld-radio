@@ -1,2 +1,0 @@
-- [Home](./)
-- [Lock (Inactive)](./lock-feature-description)
